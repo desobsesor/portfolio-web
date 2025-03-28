@@ -1,0 +1,195 @@
+@import '@/app/shared/styles/theme.scss';
+
+:host {
+    display: block;
+    color: var(--text-primary);
+    padding: var(--spacing-xl) 0;
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+.section-title {
+    font-size: 2.5rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--spacing-xl);
+    background: var(--background-secondary);
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--background-primary);
+    border-radius: var(--radius-lg);
+}
+
+.info-card {
+    @include glass-effect();
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    height: fit-content;
+
+    h3 {
+        font-size: 1.8rem;
+        margin-bottom: var(--spacing-md);
+        color: var(--accent-blue);
+    }
+
+    p {
+        color: var(--text-secondary);
+        margin-bottom: var(--spacing-lg);
+    }
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.social-link {
+    @include neu-effect();
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: transform var(--transition-normal) ease;
+
+    &:hover {
+        transform: translateX(5px);
+    }
+
+    .icon {
+        width: 24px;
+        height: 24px;
+        color: var(--accent-violet);
+    }
+}
+
+.contact-form {
+    @include glass-effect();
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    background: var(--background-primary);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.input-container {
+    position: relative;
+
+    input,
+    textarea {
+        width: 100%;
+        background: var(--background-secondary);
+        border: 1px solid transparent;
+        border-radius: var(--radius-md);
+        padding: var(--spacing-sm);
+        color: var(--text-primary);
+        font-size: 1rem;
+        transition: all var(--transition-normal) ease;
+
+        &:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        &.invalid {
+            border-color: var(--accent-pink);
+        }
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    .input-focus {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: var(--gradient-primary);
+        transition: width var(--transition-normal) ease;
+        transform: translateX(-50%);
+    }
+
+    input:focus~.input-focus,
+    textarea:focus~.input-focus {
+        width: 100%;
+    }
+}
+
+.submit-button {
+    @include neu-effect();
+    width: 100%;
+    padding: var(--spacing-md);
+    border: none;
+    border-radius: var(--radius-full);
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform var(--transition-normal) ease;
+    @include hover-lift();
+
+    &:not(:disabled):hover {
+        transform: translateY(-2px);
+    }
+
+    &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+}
+
+.button-wave {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--gradient-primary);
+    animation: wave 1.5s linear infinite;
+}
+
+@keyframes wave {
+    0% {
+        transform: translateX(-100%) scaleX(0);
+    }
+
+    50% {
+        transform: translateX(0) scaleX(1);
+    }
+
+    100% {
+        transform: translateX(100%) scaleX(0);
+    }
+}

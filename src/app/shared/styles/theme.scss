@@ -1,0 +1,108 @@
+// Modern Portfolio Theme Variables
+
+// Glass Morphism
+$glass-bg: rgba(255, 255, 255, 0.1);
+$glass-border: rgba(255, 255, 255, 0.2);
+$glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+$glass-backdrop: blur(12px);
+
+// Neumorphism
+$neu-light: rgba(255, 255, 255, 0.1);
+$neu-dark: rgba(0, 0, 0, 0.2);
+$neu-shadow-distance: 10px;
+
+// Color Palette
+:root {
+    // Base Colors
+    --background-primary: #0b0b2b;
+    --background-secondary: #14143a;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+
+    // Accent Colors (based on existing Angular palette)
+    --accent-blue: var(--bright-blue);
+    --accent-violet: var(--electric-violet);
+    --accent-pink: var(--vivid-pink);
+
+    // Gradients
+    --gradient-primary: linear-gradient(135deg,
+            var(--accent-blue) 0%,
+            var(--accent-violet) 50%,
+            var(--accent-pink) 100%);
+
+    // Animation Timings
+    --transition-fast: 200ms;
+    --transition-normal: 300ms;
+    --transition-slow: 500ms;
+
+    // Spacing
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+
+    // Border Radius
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-full: 9999px;
+}
+
+// Mixins
+@mixin glass-effect {
+    background: $glass-bg;
+    backdrop-filter: $glass-backdrop;
+    -webkit-backdrop-filter: $glass-backdrop;
+    border: 1px solid $glass-border;
+    box-shadow: $glass-shadow;
+}
+
+@mixin neu-effect {
+    background: var(--background-secondary);
+    box-shadow: #{$neu-shadow-distance} #{$neu-shadow-distance} #{$neu-shadow-distance * 2} $neu-dark,
+    #{-$neu-shadow-distance} #{-$neu-shadow-distance} #{$neu-shadow-distance * 2} $neu-light;
+}
+
+@mixin hover-lift {
+    transition: transform var(--transition-normal) ease;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+}
+
+// Animation Keyframes
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

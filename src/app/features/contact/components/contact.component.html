@@ -1,0 +1,46 @@
+<section class="contact-container" [@fadeIn]>
+    <h2 class="section-title" [@slideIn]>Contact me</h2>
+
+    <div class="contact-content" [@slideIn]>
+        <div class="contact-info">
+            <div class="info-card" [@cardEnter]>
+                <h3>Let's Connect</h3>
+                <p>Ready to start a project or just want to chat? Send me a message!</p>
+                <div class="social-links" [@staggerList]="socialLinks.length">
+                    <a *ngFor="let link of socialLinks" [href]="link.url" class="social-link" target="_blank"
+                        [@cardEnter]>
+                        <span class="icon" [innerHTML]="link.icon"></span>
+                        {{link.name}}
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <form [formGroup]="contactForm" class="contact-form" (ngSubmit)="onSubmit()" [@cardEnter]>
+            <div class="form-group" [@staggerList]="3">
+                <div class="input-container">
+                    <input type="text" formControlName="name" placeholder="Your Name"
+                        [class.invalid]="isFieldInvalid('name')">
+                    <div class="input-focus"></div>
+                </div>
+
+                <div class="input-container">
+                    <input type="email" formControlName="email" placeholder="Your Email"
+                        [class.invalid]="isFieldInvalid('email')">
+                    <div class="input-focus"></div>
+                </div>
+
+                <div class="input-container">
+                    <textarea formControlName="message" placeholder="Your Message" rows="5"
+                        [class.invalid]="isFieldInvalid('message')"></textarea>
+                    <div class="input-focus"></div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-button" [disabled]="contactForm.invalid || isSubmitting">
+                <span class="button-text">{{ isSubmitting ? 'Sending...' : 'Send Message' }}</span>
+                <div class="button-wave" *ngIf="isSubmitting"></div>
+            </button>
+        </form>
+    </div>
+</section>

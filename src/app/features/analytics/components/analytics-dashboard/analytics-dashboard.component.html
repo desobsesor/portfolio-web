@@ -1,0 +1,86 @@
+<section class="analytics-container">
+  <h2 class="section-title">Analytics Dashboard</h2>
+  
+  <div class="analytics-summary">
+    <div class="metric-card">
+      <h3>Page Views</h3>
+      <p class="metric-value">{{ metrics.pageViewCount }}</p>
+    </div>
+    
+    <div class="metric-card">
+      <h3>Project Interactions</h3>
+      <p class="metric-value">{{ metrics.projectInteractionsCount }}</p>
+    </div>
+    
+    <div class="metric-card">
+      <h3>External Link Clicks</h3>
+      <p class="metric-value">{{ metrics.externalLinkClicksCount }}</p>
+    </div>
+  </div>
+  
+  <div class="analytics-charts">
+    <h3>Analytics Visualizations</h3>
+    <div class="charts-container">
+      <div class="chart-card">
+        <h4>Page Views by Time</h4>
+        <div class="chart-wrapper">
+          <canvas baseChart
+            [data]="chartData.pageViewsChartData"
+            [options]="chartOptions.lineChartOptions"
+            [type]="'line'">
+          </canvas>
+        </div>
+      </div>
+      
+      <div class="chart-card">
+        <h4>Event Categories</h4>
+        <div class="chart-wrapper">
+          <canvas baseChart
+            [data]="chartData.categoryChartData"
+            [options]="chartOptions.pieChartOptions"
+            [type]="'pie'">
+          </canvas>
+        </div>
+      </div>
+      
+      <div class="chart-card">
+        <h4>Project Interactions</h4>
+        <div class="chart-wrapper">
+          <canvas baseChart
+            [data]="chartData.projectsChartData"
+            [options]="chartOptions.barChartOptions"
+            [type]="'bar'">
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="analytics-details">
+    <h3>Recent Events</h3>
+    <div class="events-table-container">
+      <table class="events-table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Category</th>
+            <th>Action</th>
+            <th>Label</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let event of recentEvents">
+            <td>{{ formatTimestamp(event.timestamp) }}</td>
+            <td>{{ event.category }}</td>
+            <td>{{ event.action }}</td>
+            <td>{{ event.label }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="analytics-actions">
+    <button class="clear-data-btn" (click)="clearTrackingData()">Clear Tracking Data</button>
+  </div>
+</section>

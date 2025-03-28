@@ -1,0 +1,86 @@
+<section class="about-container" [@fadeIn]>
+  <div class="profile-section" [@slideIn]>
+    <div class="profile-content">
+      <div class="profile-card">
+        <h2 class="section-title-about" >About Me 
+          <span class="section-span"> Yovany Suárez Silva</span>
+        </h2>
+        <p class="bio" style="padding: 4px; background-color: #000000; border-radius: 6px; padding-left: 10px; ">
+          A passionate developer crafting innovative digital solutions with modern technologies.
+        </p>
+      </div>
+      <div class="avatar-card" (click)="openOwnerModal()">
+        <div class="avatar-wrapper">
+          <img src="assets/6803296_ia-min.jpeg" alt="Profile Avatar" class="avatar-image">
+        </div>
+        <div class="avatar-info">
+          <h3 class="engineer-name">Software Engineer</h3>
+          <p class="engineer-title">Full Stack Developer</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="skills-section">
+    <h3 class="subsection-title">Skills</h3>
+    <div class="skills-grid" [@staggerList]="skills.length">
+      <div class="skill-card" *ngFor="let skill of skills" [@cardEnter] [@flipCard]="'inactive'" (@flipCard.done)="onAnimationDone($event)">
+        <div class="skill-card-inner">
+          <div class="skill-card-front">
+            <div class="skill-icon" [innerHTML]="skill.icon"></div>
+            <h4 class="skill-name">{{skill.name}}</h4>
+            <div class="skill-level">
+              <div class="level-bar" [style.width.%]="skill.level"></div>
+            </div>
+          </div>
+          <div class="skill-card-back">
+            <h4 class="skill-name">{{skill.name}}</h4>
+            <p class="skill-description">{{skill.description || 'Experienced in building modern applications with ' + skill.name}}</p>
+            <div class="skill-level-detail">
+              <span class="level-label">Proficiency:</span>
+              <span class="level-value">{{skill.level}}%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-word-cloud></app-word-cloud>
+
+  <div class="owner-modal" *ngIf="showOwnerModal" [@modalEnter] (click)="closeOwnerModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="close-button" (click)="closeOwnerModal()">×</button>
+      <div class="modal-header">
+        <div class="modal-avatar">
+          <img [src]="portfolioOwner.avatar" [alt]="portfolioOwner.name">
+        </div>
+        <div class="modal-title">
+          <h2>{{portfolioOwner.name}}</h2>
+          <p>{{portfolioOwner.title}}</p>
+        </div>
+      </div>
+      <div class="modal-body">
+        <p class="owner-bio">{{portfolioOwner.bio}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="experience-section">
+    <h3 class="subsection-title">Experience</h3>
+    
+    <p class="bio" style="padding: 4px; background-color: #000000; border-radius: 6px; padding-left: 10px; ">
+    Over 10 years of experience in software engineering, with a solid track record of success in developing and implementing innovative solutions for various sectors.
+    </p>
+    <div class="timeline" [@staggerList]="experiences.length">
+      <div class="experience-card" *ngFor="let exp of experiences" [@cardEnter]>
+        <div class="exp-header">
+          <h4 class="role">{{exp.role}}</h4>
+          <span class="company">{{exp.company}}</span>
+          <span class="period">{{exp.period}}</span>
+        </div>
+        <p class="description">{{exp.description}}</p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,49 @@
+<section class="projects-container" [@fadeIn]>
+    <h2 class="section-title" [@slideIn]>Some outstanding projects</h2>
+
+    <div class="projects-grid" [@staggerList]="projects.length">
+        <div class="project-card" *ngFor="let project of projects" [@cardEnter]>
+            <div class="card-content">
+                <div class="project-image-container" (mouseenter)="showTooltip(project)" (mouseleave)="hideTooltip()">
+                    <div class="project-image" [style.backgroundImage]="'url(' + project.image + ')'">
+                        <div class="image-overlay"></div>
+                    </div>
+
+                    <!-- Tooltip para imágenes adicionales -->
+                    <div class="tooltip" *ngIf="hoveredProject === project && project.additionalImages?.length">
+                        <div class="tooltip-images">
+                            <img *ngFor="let img of project.additionalImages" [src]="img"
+                                [alt]="project.title + ' screenshot'">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-info">
+                    <h3 class="project-title">{{project.title}}</h3>
+                    <p class="project-description">{{project.description}}</p>
+                    <div class="project-tags">
+                        <span class="tag" *ngFor="let tag of project.tags">{{tag}}</span>
+                    </div>
+                    <div class="project-actions">
+                        <button class="view-details-btn" (click)="openProject(project)">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="project-modal" *ngIf="selectedProject" [@modalEnter] (click)="closeProject()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <button class="close-button" (click)="closeProject()">×</button>
+            <h2>{{selectedProject.title}}</h2>
+            <img style="max-height: 58vh; max-width: auto; " [src]="selectedProject.image"
+                [alt]="selectedProject.title">
+            <p>{{selectedProject.description}}</p>
+            <div class="project-tags modal-tags">
+                <span class="tag" *ngFor="let tag of selectedProject.tags">{{tag}}</span>
+            </div>
+            <a [href]="selectedProject.link" target="_blank" class="view-project"
+                (click)="onExternalLinkClick(selectedProject)">View Project</a>
+        </div>
+    </div>
+</section>

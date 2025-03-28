@@ -1,0 +1,131 @@
+@import '@/app/shared/styles/theme.scss';
+
+:host {
+    display: block;
+    min-height: 100vh;
+    color: var(--text-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.home-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xl);
+    position: relative;
+    z-index: 1;
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 800px;
+    @include glass-effect();
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+}
+
+.title {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1.2;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-lg);
+}
+
+.cta-button {
+    @include neu-effect();
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: none;
+    border-radius: var(--radius-full);
+    font-size: 1.125rem;
+    cursor: pointer;
+    color: black;
+    background: var(--gradient-primary);
+    transition: transform 0.3s ease;
+    @include hover-lift();
+}
+
+.particle-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.avatar-card {
+    @include glass-effect();
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 300px;
+    transition: transform 0.3s ease;
+    margin-top: 50px;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+
+    .avatar-wrapper {
+        cursor: pointer;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-bottom: var(--spacing-md);
+        border: 4px solid rgba(255, 255, 255, 0.1);
+        @include neu-effect();
+
+        @media (max-width: 768px) {
+            padding-top: -40px;
+        }
+    }
+
+    .avatar-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            padding-top: -40px;
+        }
+    }
+
+    .avatar-info {
+        text-align: center;
+
+        .engineer-name {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-xs);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .engineer-title {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+    }
+}

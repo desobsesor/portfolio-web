@@ -1,0 +1,21 @@
+<section class="home-container" [@fadeInUp]>
+    <div class="hero-content">
+        <h1 class="title" [@slideIn]>Welcome to My Portfolio</h1>
+        <p class="subtitle" [@slideIn]="{ value: '*', params: { delay: '200ms' } }">
+            Crafting Digital Experiences
+        </p>
+        <div class="cta-container" [@slideIn]="{ value: '*', params: { delay: '400ms' } }">
+            <button (click)="navigateToProjects()" class="cta-button">Explore My Work</button>
+        </div>
+
+        <div class="avatar-card">
+            <div class="avatar-wrapper">
+                <img src="assets/6803296_ia_avatar-min.png" alt="Profile Avatar" class="avatar-image">
+            </div>
+        </div>
+    </div>
+    <div class="particle-container">
+        <!-- Particle effect will be added here -->
+
+    </div>
+</section>
