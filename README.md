@@ -4,7 +4,7 @@ _Portfolio of projects developed at CDS_
 
 ## Preview
 
-![image](./public/assets/screenshots/portfolio_web.png)
+![image](./public/assets/screenshots/portfolio-web-min.png)
 
 ========================================================================
 _portfolio.cds.net.co_
