@@ -42,7 +42,6 @@ testem.log
 Thumbs.db
 
 # Docs
-docs/
 .vscode
 
 package-lock.json
