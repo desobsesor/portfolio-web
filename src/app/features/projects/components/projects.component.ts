@@ -106,8 +106,8 @@ export class ProjectsComponent implements OnInit {
     {
       title: 'EAOptimaERP Accounting',
       description: 'Accounting management module for the Optima Ballistic Glass ERP system',
-      image: 'assets/screenshots/vibra-web-min.png',
-      additionalImages: ['assets/screenshots/vibra-web-min.png',],
+      image: 'assets/screenshots/cuentas-contables-web-min.jpeg',
+      additionalImages: ['assets/screenshots/optimaerp-web-min.png', 'assets/screenshots/optimaerp-web-point-min.png',],
       tags: ['PHP', 'JQuery', 'PostgresQL', 'HTML5'],
       link: 'http://cds.net.co'
     },

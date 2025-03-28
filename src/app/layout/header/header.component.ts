@@ -16,7 +16,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
           <a routerLink="/about" routerLinkActive="active">About</a>
           <a routerLink="/projects" routerLinkActive="active">Projects</a>
           <a routerLink="/contact" routerLinkActive="active">Contact</a>
-          <a routerLink="/analytics" routerLinkActive="active">Analytics</a>
+          <!--<a routerLink="/analytics" routerLinkActive="active">Analytics</a>-->
         </div>
       </div>
     </nav>
