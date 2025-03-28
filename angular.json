@@ -16,7 +16,7 @@
             "outputPath": "dist/portfolio-cds",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "baseHref": "/",
+            "baseHref": "/portfolio-web/",
             "polyfills": [
               "zone.js"
             ],
