@@ -11,6 +11,9 @@ $neu-light: rgba(255, 255, 255, 0.1);
 $neu-dark: rgba(0, 0, 0, 0.2);
 $neu-shadow-distance: 10px;
 
+// Import mixins
+/*@import './_mixins.scss';*/
+
 // Color Palette
 :root {
     // Base Colors
