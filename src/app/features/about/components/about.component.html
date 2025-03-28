@@ -28,13 +28,13 @@
         <div class="skill-card-inner">
           <div class="skill-card-front">
             <div class="skill-icon" [innerHTML]="skill.icon"></div>
-            <h4 class="skill-name">{{skill.name}}</h4>
+            <h4 class="skill-name" translate="no" >{{skill.name}}</h4>
             <div class="skill-level">
               <div class="level-bar" [style.width.%]="skill.level"></div>
             </div>
           </div>
           <div class="skill-card-back">
-            <h4 class="skill-name">{{skill.name}}</h4>
+            <h4 class="skill-name" translate="no">{{skill.name}}</h4>
             <p class="skill-description">{{skill.description || 'Experienced in building modern applications with ' + skill.name}}</p>
             <div class="skill-level-detail">
               <span class="level-label">Proficiency:</span>
