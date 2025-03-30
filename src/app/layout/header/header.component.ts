@@ -13,8 +13,8 @@ import { trigger, transition, style, animate } from '@angular/animations';
         <a class="logo" routerLink="/">Portfolio</a>
         <div class="nav-links">
           <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+          <a routerLink="/projects" routerLinkActive="active">Projects</a>      
           <a routerLink="/about" routerLinkActive="active">About</a>
-          <a routerLink="/projects" routerLinkActive="active">Projects</a>
           <a routerLink="/contact" routerLinkActive="active">Contact</a>
           <!--<a routerLink="/analytics" routerLinkActive="active">Analytics</a>-->
         </div>

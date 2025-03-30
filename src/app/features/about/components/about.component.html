@@ -72,15 +72,23 @@
     <p class="bio" style="padding: 4px; background-color: #000000; border-radius: 6px; padding-left: 10px; ">
     Over 10 years of experience in software engineering, with a solid track record of success in developing and implementing innovative solutions for various sectors.
     </p>
-    <div class="timeline" [@staggerList]="experiences.length">
-      <div class="experience-card" *ngFor="let exp of experiences" [@cardEnter]>
-        <div class="exp-header">
-          <h4 class="role">{{exp.role}}</h4>
-          <span class="company">{{exp.company}}</span>
-          <span class="period">{{exp.period}}</span>
+    <div class="timeline-vertical" [@staggerList]="experiences.length">
+      <div class="timeline-line"></div>
+      <ng-container *ngFor="let exp of experiences; let i = index">
+        <div class="timeline-marker" [style.grid-row]="i+1">
+          <div class="timeline-dot"></div>
         </div>
-        <p class="description">{{exp.description}}</p>
-      </div>
+        <div class="timeline-item" [@cardEnter] [ngClass]="{'timeline-left': i % 2 === 0, 'timeline-right': i % 2 !== 0}" [style.grid-row]="i+1">
+          <div class="experience-card">
+            <div class="period-badge">{{exp.period}}</div>
+            <div class="exp-header">
+              <h4 class="role">{{exp.role}}</h4>
+              <span class="company">{{exp.company}}</span>
+            </div>
+            <p class="description">{{exp.description}}</p>
+          </div>
+        </div>
+      </ng-container>
     </div>
   </div>
 </section>

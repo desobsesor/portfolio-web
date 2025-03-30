@@ -70,21 +70,21 @@ export class ProjectsComponent implements OnInit {
         'assets/screenshots/mia-wallet-web-min.png',
         'assets/screenshots/mia-wallet-web-invoice-min.png'
       ],
-      tags: ['NodeJS', 'Express', 'Mongoose', 'MongoDB', 'Swagger', 'NextJS', 'React', 'Socket', 'Tailwind', 'AI'],
+      tags: ['NodeJS', 'Express', 'Mongoose', 'MongoDB', 'Swagger', 'NextJS', 'React', 'SocketIO', 'Tailwind', 'IA'],
       link: 'http://mia.suros.co'
     },
     {
       title: 'Genealogical Chart',
-      description: 'Web application for family tree design. The resource can be embedded within a wrapper.',
+      description: 'Web application for family tree design. The resource can be embedded within a wrapper',
       image: 'assets/screenshots/genealogical-chart-web-min.png',
-      tags: ['React', 'Vite', 'React Flow', 'Tailwind', 'AI'],
+      tags: ['React', 'Vite', 'React Flow', 'Tailwind', 'IA'],
       link: 'http://cds.net.co/genealogical'
     },
     {
       title: 'Separa App',
       description: 'Web application for booking workspaces',
       image: 'assets/screenshots/separa-web-min.png',
-      tags: ['NodeJS', 'NestJS', 'React', 'NextJS', 'MongoDB', 'Tailwind', 'AI'],
+      tags: ['NodeJS', 'NestJS', 'React', 'NextJS', 'MongoDB', 'Tailwind', 'IA'],
       link: 'http://cds.net.co'
     },
     {
@@ -92,7 +92,7 @@ export class ProjectsComponent implements OnInit {
       description: 'Interactive web mobile with real-time data visualization and reporting the emotions',
       image: 'assets/screenshots/vibra-web-min.png',
       additionalImages: ['assets/screenshots/vibra-web-min.png',],
-      tags: ['NodeJS', 'NestJS', 'React', 'React Native', 'NextJS', 'MongoDB', 'Tailwind', 'AI'],
+      tags: ['NodeJS', 'NestJS', 'MongoDB', 'React', 'React Native', 'Tailwind', 'Expo', 'IA'],
       link: 'http://cds.net.co'
     },
     {
@@ -108,12 +108,12 @@ export class ProjectsComponent implements OnInit {
       description: 'Accounting management module for the Optima Ballistic Glass ERP system',
       image: 'assets/screenshots/cuentas-contables-web-min.jpeg',
       additionalImages: ['assets/screenshots/optimaerp-web-min.png', 'assets/screenshots/optimaerp-web-point-min.png',],
-      tags: ['PHP', 'JQuery', 'PostgresQL', 'HTML5'],
+      tags: ['PHP', 'JQuery', 'PostgresQL', 'HTML5', 'CSS'],
       link: 'http://cds.net.co'
     },
     {
       title: 'Suros',
-      description: 'Web-based system for managing information in clinics and hospitals',
+      description: 'Web based system for managing information in clinics and hospitals',
       image: 'assets/screenshots/suros-historia-clinica-web-min.png',
       additionalImages: [
         'assets/screenshots/suros-web-min.png',
@@ -121,10 +121,9 @@ export class ProjectsComponent implements OnInit {
         'assets/screenshots/suros-facturador-web-min.png',
         'assets/screenshots/suros-historia-clinica-web-min.png'
       ],
-      tags: ['C#', 'Ext.Net', 'SQL Server', 'JQuery', 'SignalR', 'IIS'],
+      tags: ['C#', 'Ext .Net', 'SQL Server', 'JQuery', 'SignalR', 'IIS'],
       link: 'http://cds.net.co'
     },
-
     {
       title: 'Suros Veterinaria',
       description: 'Web-based information system for veterinary clinic management',
@@ -133,7 +132,7 @@ export class ProjectsComponent implements OnInit {
         'assets/screenshots/sean-web-min.png',
         'assets/screenshots/sean-pos-web-min.png',
       ],
-      tags: ['C#', 'Ext.Net', 'SQL Server', 'JQuery', 'SignalR', 'IIS'],
+      tags: ['C#', 'Ext .Net', 'SQL Server', 'JQuery', 'SignalR', 'IIS'],
       link: 'http://cds.net.co'
     },
     {
@@ -141,14 +140,14 @@ export class ProjectsComponent implements OnInit {
       description: 'POS application for pharmacy management',
       image: 'assets/screenshots/scip-pos-web-min.JPG',
       additionalImages: ['assets/screenshots/scip-pos-web-min.JPG', 'assets/screenshots/scip-web-min.JPG'],
-      tags: ['Angular', 'Node.js', 'MongoDB', 'AI'],
+      tags: ['Angular', 'NodeJS', 'MongoDB', 'IA'],
       link: 'http://cds.net.co'
     },
     {
       title: 'Portfolio',
       description: 'Web application to view my development company project portfolio',
       image: 'assets/screenshots/portfolio-web-min.png',
-      tags: ['Angular', 'NodeJS', 'AI'],
+      tags: ['Angular', 'NodeJS', 'IA'],
       link: 'http://cds.net.co'
     },
     {
@@ -159,7 +158,7 @@ export class ProjectsComponent implements OnInit {
         'assets/screenshots/scip-zapateria-plan-web-min.jpeg',
         'assets/screenshots/scip-zapateria-web-min.jpeg'
       ],
-      tags: ['PHP', 'JQuery', 'PostgresQL', 'HTML5'],
+      tags: ['PHP', 'JQuery', 'PostgresQL', 'HTML5', 'CSS'],
       link: 'http://cds.net.co'
     },
     {
@@ -171,7 +170,7 @@ export class ProjectsComponent implements OnInit {
         'assets/screenshots/mukatri-web-min.PNG',
         'assets/screenshots/mukatri-web-min.PNG'
       ],
-      tags: ['.Net ASP', 'Bootstrap', 'SQL Server', 'JQuery'],
+      tags: ['.Net ASP', 'Bootstrap', 'SQL Server', 'JQuery', 'HTML5', 'CSS'],
       link: 'http://cds.net.co'
     },
     {
@@ -183,7 +182,7 @@ export class ProjectsComponent implements OnInit {
         'assets/screenshots/scip-opticas-sales-min.PNG',
         'assets/screenshots/scip-opticas-web-min.PNG'
       ],
-      tags: ['.Net ASP', 'Bootstrap', 'SQL Server', 'JQuery'],
+      tags: ['.Net ASP', 'Bootstrap', 'SQL Server', 'JQuery', 'HTML5', 'CSS'],
       link: 'http://cds.net.co'
     },
     {
@@ -195,12 +194,12 @@ export class ProjectsComponent implements OnInit {
         'assets/screenshots/agenda-caquetena-charts-web-min.PNG',
         'assets/screenshots/agenda-caquetena-web-min.PNG'
       ],
-      tags: ['.Net ASP', 'Bootstrap', 'MySQL', 'JQuery'],
+      tags: ['.Net ASP', 'Bootstrap', 'MySQL', 'JQuery', 'HTML5', 'CSS'],
       link: 'http://cds.net.co'
     },
     {
       title: 'POS Restaurant',
-      description: 'POS application for restaurants.',
+      description: 'POS application for restaurants',
       image: 'assets/screenshots/pos-min.jpg',
       tags: ['PHP', 'JQuery', 'PostgresQL', 'HTML5'],
       link: 'http://cds.net.co'
@@ -210,7 +209,7 @@ export class ProjectsComponent implements OnInit {
       description: 'Website of the Caquetá Chamber of Commerce',
       image: 'assets/screenshots/ccflorencia-web-min.png',
       additionalImages: ['assets/screenshots/ccflorencia-web-min.png', 'assets/screenshots/ccflorencia-admin-web-min.png'],
-      tags: ['.Net ASP', 'Bootstrap', 'SQL Server', 'JQuery'],
+      tags: ['.Net ASP', 'Bootstrap', 'SQL Server', 'JQuery', 'HTML5', 'CSS'],
       link: 'http://cds.net.co'
     },
     {
@@ -218,11 +217,11 @@ export class ProjectsComponent implements OnInit {
       description: 'Website of the Afrocaq African American Foundation',
       image: 'assets/screenshots/afrocaq-web-min.png',
       additionalImages: ['assets/screenshots/afrocaq-web-min.png', 'assets/screenshots/ccflorencia-admin-web-min.png'],
-      tags: ['.Net ASP', 'Bootstrap', 'SQL Server', 'JQuery'],
+      tags: ['.Net ASP', 'Bootstrap', 'SQL Server', 'JQuery', 'HTML5', 'CSS'],
       link: 'http://cds.net.co'
     },
     {
-      title: 'Gnerarator Code MDA',
+      title: 'Generator Code MDA',
       description: 'Code generator for applications through Model-Driven Development',
       image: 'assets/screenshots/metamodeloMSHtml5_in_eclipsejuno-min.PNG',
       tags: ['ATL', 'MofScript', 'Eclipse', 'MDA'],

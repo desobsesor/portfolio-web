@@ -28,7 +28,7 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles/themes/styles.css"
             ],
             "scripts": [],
             "stylePreprocessorOptions": {
@@ -91,7 +91,7 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles/themes/styles.css"
             ],
             "scripts": [],
             "stylePreprocessorOptions": {

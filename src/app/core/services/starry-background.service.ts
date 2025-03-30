@@ -211,7 +211,7 @@ export class StarryBackgroundService {
                 const radius = 5 + Math.random() * 15;
                 surfaceDetails.push({
                     x: (Math.random() - 0.5) * 0.8, // Relative position (-0.4 to 0.4)
-                    y: (Math.random() - 0.5) * 0.8,
+                    y: (Math.random() - 0.5) * 0.3,
                     radius: radius,
                     color: `${planetColors[i]}${Math.floor(Math.random() * 40 + 20).toString(16)}` // Variation of the main color
                 });
@@ -222,10 +222,10 @@ export class StarryBackgroundService {
 
             this.planets.push({
                 x: this.canvas.width * positions[i].xRatio,
-                y: (this.canvas.height * positions[i].yRatio) - 90,
+                y: (this.canvas.height * positions[i].yRatio) - 150,
                 size: 40 + i * 15, // Different sizes for each planet
                 color: planetColors[i],
-                atmosphereSize: 1.3 + i * 0.2,
+                atmosphereSize: 1.3 + i * 0.8,
                 atmosphereColor: atmosphereColors[i],
                 rotationAngle: Math.random() * Math.PI * 3,
                 rotationSpeed: 0.0005 + i * 0.0003,
@@ -243,8 +243,8 @@ export class StarryBackgroundService {
      */
     private initSpaceStation() {
         this.spaceStation = {
-            x: this.canvas.width * 0.75,
-            y: this.canvas.height * 0.3,
+            x: this.canvas.width * 0.55,
+            y: this.canvas.height * 0.2,
             scale: this.SPACE_STATION_SCALE,
             glowIntensity: 0,
             glowPhase: 0
@@ -259,7 +259,7 @@ export class StarryBackgroundService {
         const { x, y, scale, glowIntensity } = this.spaceStation;
 
         this.ctx.save();
-        this.ctx.translate(x - 160, y - 110);
+        this.ctx.translate(x + 300, y - 40);
         this.ctx.scale(scale, scale);
 
         // Glow effect

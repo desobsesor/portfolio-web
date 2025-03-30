@@ -114,7 +114,7 @@ export class AboutDataService {
                 role: 'Full Stack Software Engineer',
                 company: 'SoftProject.',
                 period: '2024 - 2025',
-                description: 'I analyzed, designed, developed, and implemented portfolio software for the healthcare sector using the NodeJS - NestJS, React - NextJS, and MongoDB technology stack, supported by artificial intelligence.'
+                description: 'Analyze, design, develop, and implement portfolio software for the healthcare sector using the NodeJS - NestJS, React - NextJS, and MongoDB technology stack, supported by artificial intelligence.'
             },
             {
                 role: 'Full Stack Software Engineer',
@@ -132,7 +132,7 @@ export class AboutDataService {
                 role: 'Senior Systems Analyst',
                 company: 'AseSoftware',
                 period: '2019 - 2022',
-                description: 'I analyzed, designed, developed, and implemented software solutions for leading companies in the state and the country. The technology stacks used were diverse, including Java Spring Boot – Angular - Oracle, React - Java Spring Boot - SQL Server, NodeJS – Angular - SQL Server, .Net C# - React – SQL Server.'
+                description: 'Analyze, design, develop, and implement software solutions for leading companies in the state and the country. The technologies used were diverse, including Java Spring Boot – Angular – Oracle, React – Java Spring Boot – SQL Server, NodeJS – Angular – SQL Server, .Net C# – React – SQL Server.'
             },
             {
                 role: 'Full Stack Developer',
