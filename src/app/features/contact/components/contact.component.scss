@@ -66,12 +66,12 @@
 }
 
 .social-link {
-    @include neu-effect();
+    /*@include neu-effect();*/
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
-    padding: var(--spacing-sm);
-    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-sm);
     color: var(--text-primary);
     text-decoration: none;
     transition: transform var(--transition-normal) ease;
@@ -147,7 +147,7 @@
 }
 
 .submit-button {
-    @include neu-effect();
+    //@include neu-effect();
     width: 100%;
     padding: var(--spacing-md);
     border: none;
@@ -158,7 +158,7 @@
     position: relative;
     overflow: hidden;
     transition: transform var(--transition-normal) ease;
-    @include hover-lift();
+    //@include hover-lift();
 
     &:not(:disabled):hover {
         transform: translateY(-2px);

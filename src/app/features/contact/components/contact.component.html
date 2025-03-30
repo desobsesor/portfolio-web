@@ -38,7 +38,11 @@
             </div>
 
             <button type="submit" class="submit-button" [disabled]="contactForm.invalid || isSubmitting">
-                <span class="button-text">{{ isSubmitting ? 'Sending...' : 'Send Message' }}</span>
+                <span class="button-text">
+                    <span style="margin-top: -30px !important;" >
+                        {{ isSubmitting ? 'Sending...' : 'Send Message' }}
+                    </span>
+                </span>
                 <div class="button-wave" *ngIf="isSubmitting"></div>
             </button>
         </form>
