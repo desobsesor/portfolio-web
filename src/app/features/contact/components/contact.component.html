@@ -4,7 +4,7 @@
     <div class="contact-content" [@slideIn]>
         <div class="contact-info">
             <div class="info-card" [@cardEnter]>
-                <h3>Let's Connect</h3>
+                <h3 style="margin-top: -16px;">Let's Connect</h3>
                 <p>Ready to start a project or just want to chat? Send me a message!</p>
                 <div class="social-links" [@staggerList]="socialLinks.length">
                     <a *ngFor="let link of socialLinks" [href]="link.url" class="social-link" target="_blank"
@@ -39,7 +39,7 @@
 
             <button type="submit" class="submit-button" [disabled]="contactForm.invalid || isSubmitting">
                 <span class="button-text">
-                    <span style="margin-top: -30px !important;" >
+                    <span style="margin-top: -30px !important; color: black" >
                         {{ isSubmitting ? 'Sending...' : 'Send Message' }}
                     </span>
                 </span>

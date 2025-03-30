@@ -435,11 +435,9 @@
 }
 
 .experience-card {
-    /*@include glass-effect();*/
     padding: var(--spacing-lg);
     border-radius: var(--radius-md);
-    /*@include hover-lift();*/
-    background: var(--background-primary);
+    background: #120122;
     position: relative;
     overflow: hidden;
     border: 6px solid transparent;

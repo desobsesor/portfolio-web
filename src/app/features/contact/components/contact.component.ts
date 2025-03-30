@@ -53,7 +53,8 @@ export class ContactComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    private emailService: EmailService,
   ) {
     this.contactForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
@@ -103,7 +104,14 @@ export class ContactComponent implements OnInit {
       this.isSubmitting = true;
       try {
         // Implement form submission logic here
-        await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate API call
+        const emailData: EmailData = {
+          name: this.contactForm.get('name')?.value,
+          email: this.contactForm.get('email')?.value,
+          message: this.contactForm.get('message')?.value
+        };
+
+        await this.emailService.sendEmail(emailData);
+        // await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate API call
         this.contactForm.reset();
         // Show success message
       } catch (error) {

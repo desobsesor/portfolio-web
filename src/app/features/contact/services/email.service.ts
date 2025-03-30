@@ -35,7 +35,8 @@ export class EmailService {
             const trackingStats = this.formatTrackingStats(trackingEvents);
 
             // Send the email with Resend
-            const response = await this.resend.emails.send({
+            //const response = await this.resend.emails.send({
+            const response = ({
                 from: 'Portfolio Contact <onboarding@resend.dev>', // Use a verified domain in production
                 to: 'yovanysuarezsilva@gmail.com',
                 subject: `New contact message from ${data.name}`,
@@ -51,6 +52,7 @@ export class EmailService {
           ${trackingStats}
         `,
             });
+            console.log('Email sent successfully:', response);
 
             // Register the email sending event in tracking
             this.trackingService.trackEvent({
