@@ -74,7 +74,7 @@ export class ProjectsComponent implements OnInit {
         'assets/screenshots/simple-payment-4-min.png',
         'assets/screenshots/simple-payment-5-min.png'
       ],
-      tags: ['NodeJS', 'NestJS', 'PostgreSQL', 'Swagger', 'Socket', 'IA'],
+      tags: ['NodeJS', 'NestJS', 'PostgreSQL', 'Swagger', 'Socket', 'React', 'Material UI', 'IA'],
       link: 'http://mia.suros.co'
     },
     {
