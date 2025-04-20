@@ -63,6 +63,21 @@ interface Project {
 export class ProjectsComponent implements OnInit {
   projects: Project[] = [
     {
+      title: 'Simple Payment',
+      description: 'simple payment system to implement with a payment gateway.',
+      image: 'assets/screenshots/simple-payment-min.png',
+      additionalImages: [
+        'assets/screenshots/simple-payment-min.png',
+        'assets/screenshots/simple-payment-1-min.png',
+        'assets/screenshots/simple-payment-2-min.png',
+        'assets/screenshots/simple-payment-3-min.png',
+        'assets/screenshots/simple-payment-4-min.png',
+        'assets/screenshots/simple-payment-5-min.png'
+      ],
+      tags: ['NodeJS', 'NestJS', 'PostgreSQL', 'Swagger', 'Socket', 'IA'],
+      link: 'http://mia.suros.co'
+    },
+    {
       title: 'Modern Wallet',
       description: 'Portfolio management system for the health sector',
       image: 'assets/screenshots/mia-wallet-web-min.png',
