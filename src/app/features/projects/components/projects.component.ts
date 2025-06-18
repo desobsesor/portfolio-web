@@ -63,6 +63,31 @@ interface Project {
 export class ProjectsComponent implements OnInit {
   projects: Project[] = [
     {
+      title: 'Tech Racing F1',
+      description: 'It allows you to run a simulation that generates a set of race strategies, taking into account the tires and the total number of laps.',
+      image: 'assets/screenshots/f1-1-min.png',
+      additionalImages: [
+        'assets/screenshots/f1-1-min.png',
+        'assets/screenshots/f1-2-min.png',
+        'assets/screenshots/f1-3-min.png',
+        'assets/screenshots/f1-7.png',
+        'assets/screenshots/f1-6.png',
+      ],
+      tags: ['.NET', 'Entity Framework', 'Serilog', 'Swagger', 'SQL Server', 'MediatR', 'Angular', 'Typescript', 'TailWind', 'RxJS'],
+      link: 'https://tech-racing-f1.cdsmaya.com.co'
+    },
+    {
+      title: 'Daily projection grid',
+      description: 'A modern web application for visualizing and managing product projections, developed with React, TypeScript, Tailwind CSS, and a hexagonal architecture.',
+      image: 'assets/screenshots/projection-grid-web-min.png',
+      additionalImages: [
+        'assets/screenshots/projection-grid-web-min.png',
+        'assets/screenshots/projection-grid-web-min.png',
+      ],
+      tags: ['React', 'Typescript', 'TailWind', 'Zustand', 'React window', 'Web Workers', 'Comlink'],
+      link: 'https://projection-grid.cdsmaya.com.co'
+    },
+    {
       title: 'Simple Payment',
       description: 'simple payment system to implement with a payment gateway.',
       image: 'assets/screenshots/simple-payment-min.png',
