@@ -63,20 +63,6 @@ interface Project {
 export class ProjectsComponent implements OnInit {
   projects: Project[] = [
     {
-      title: 'Tech Racing F1',
-      description: 'It allows you to run a simulation that generates a set of race strategies, taking into account the tires and the total number of laps.',
-      image: 'assets/screenshots/f1-1-min.png',
-      additionalImages: [
-        'assets/screenshots/f1-1-min.png',
-        'assets/screenshots/f1-2-min.png',
-        'assets/screenshots/f1-3-min.png',
-        'assets/screenshots/f1-7.png',
-        'assets/screenshots/f1-6.png',
-      ],
-      tags: ['.NET', 'Entity Framework', 'Serilog', 'Swagger', 'SQL Server', 'MediatR', 'Angular', 'Typescript', 'TailWind', 'RxJS'],
-      link: 'https://tech-racing-f1.cdsmaya.com.co'
-    },
-    {
       title: 'Daily projection grid',
       description: 'A modern web application for visualizing and managing product projections, developed with React, TypeScript, Tailwind CSS, and a hexagonal architecture.',
       image: 'assets/screenshots/projection-grid-web-min.png',
@@ -85,7 +71,21 @@ export class ProjectsComponent implements OnInit {
         'assets/screenshots/projection-grid-web-min.png',
       ],
       tags: ['React', 'Typescript', 'TailWind', 'Zustand', 'React window', 'Web Workers', 'Comlink'],
-      link: 'https://projection-grid.cdsmaya.com.co'
+      link: 'https://github.com/desobsesor/projection-grid-web'
+    },
+    {
+      title: 'Tech Racing F1',
+      description: 'It allows you to run a simulation that generates a set of race strategies, taking into account the tires and the total number of laps.',
+      image: 'assets/screenshots/f1-3-min.png',
+      additionalImages: [
+        'assets/screenshots/f1-1-min.png',
+        'assets/screenshots/f1-2-min.png',
+        'assets/screenshots/f1-3-min.png',
+        'assets/screenshots/f1-7.png',
+        'assets/screenshots/f1-6.png',
+      ],
+      tags: ['.NET', 'Entity Framework', 'Serilog', 'Swagger', 'SQL Server', 'MediatR', 'Angular', 'Typescript', 'TailWind', 'RxJS'],
+      link: 'https://github.com/desobsesor/tech-racing-f1-web'
     },
     {
       title: 'Simple Payment',
@@ -100,7 +100,7 @@ export class ProjectsComponent implements OnInit {
         'assets/screenshots/simple-payment-5-min.png'
       ],
       tags: ['NodeJS', 'NestJS', 'PostgreSQL', 'Swagger', 'Socket', 'React', 'Material UI', 'IA'],
-      link: 'http://mia.suros.co'
+      link: 'https://github.com/desobsesor/simple-payment-web'
     },
     {
       title: 'Modern Wallet',
