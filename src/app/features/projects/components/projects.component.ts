@@ -64,7 +64,7 @@ export class ProjectsComponent implements OnInit {
   projects: Project[] = [{
       title: 'Social Network - Galactic Connection',
       description: 'Modern social network for all galactic beings (human, aliens, and robots) to connect, share, and discover, developed with React, NextJS, TypeScript, Tailwind CSS and a hexagonal architecture.',
-      image: 'assets/screenshots/social-network-VII-min.png',
+      image: 'assets/screenshots/social-network-min.png',
       additionalImages: [
         'assets/screenshots/social-network-VII-min.png',
         'assets/screenshots/social-network-VI-min.png',
