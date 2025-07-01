@@ -61,7 +61,21 @@ interface Project {
   ]
 })
 export class ProjectsComponent implements OnInit {
-  projects: Project[] = [
+  projects: Project[] = [{
+      title: 'Social Network - Galactic Connection',
+      description: 'Modern social network for all galactic beings (human, aliens, and robots) to connect, share, and discover, developed with React, NextJS, TypeScript, Tailwind CSS and a hexagonal architecture.',
+      image: 'assets/screenshots/social-network-VII-min.png',
+      additionalImages: [
+        'assets/screenshots/social-network-VII-min.png',
+        'assets/screenshots/social-network-VI-min.png',
+        'assets/screenshots/social-network-II-min.png',
+        'assets/screenshots/social-network-III-min.png',
+        'assets/screenshots/social-network-IV-min.png',
+        'assets/screenshots/social-network-V-min.png',
+      ],
+      tags: ['React', 'Typescript', 'TailWind', 'Zustand', 'React Query', 'Socket.io', 'NextJS'],
+      link: 'https://github.com/desobsesor/social-network-web'
+    }, 
     {
       title: 'Daily projection grid',
       description: 'A modern web application for visualizing and managing product projections, developed with React, TypeScript, Tailwind CSS, and a hexagonal architecture.',
