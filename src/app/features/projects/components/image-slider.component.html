@@ -1,0 +1,11 @@
+<div class="image-slider" (mouseenter)="stopAutoSlide()" (mouseleave)="startAutoSlide()">
+  <div class="slider-wrapper" [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
+    <img *ngFor="let img of images" [src]="img" [alt]="altText" class="slider-image" />
+  </div>
+  <button class="slider-control prev" (click)="prev()" aria-label="Previous image">&#10094;</button>
+  <button class="slider-control next" (click)="next()" aria-label="Next image">&#10095;</button>
+  <div class="slider-dots">
+    <span *ngFor="let img of images; let i = index" (click)="goTo(i)" [class.active]="i === currentIndex"
+      class="dot"></span>
+  </div>
+</div>

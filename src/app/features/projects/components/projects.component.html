@@ -6,7 +6,7 @@
             <div class="card-content">
                 <div class="project-image-container" (mouseenter)="showTooltip(project)" (mouseleave)="hideTooltip()">
                     <div class="project-image" [style.backgroundImage]="'url(' + project.image + ')'">
-                        <div class="image-overlay"></div>
+                        <div (click)="openProject(project)" class="image-overlay"></div>
                     </div>
 
                     <!-- Tooltip para imágenes adicionales -->
@@ -36,8 +36,9 @@
         <div class="modal-content" (click)="$event.stopPropagation()">
             <button class="close-button" (click)="closeProject()">×</button>
             <h2>{{selectedProject.title}}</h2>
-            <img style="max-height: 58vh; max-width: auto; " [src]="selectedProject.image"
-                [alt]="selectedProject.title">
+            <app-image-slider *ngIf="selectedProject.additionalImages && selectedProject.additionalImages.length > 0"
+                [images]="selectedProject.additionalImages"
+                [altText]="selectedProject.title + ' screenshot'"></app-image-slider>
             <p>{{selectedProject.description}}</p>
             <div class="project-tags modal-tags">
                 <span class="tag" *ngFor="let tag of selectedProject.tags">{{tag}}</span>

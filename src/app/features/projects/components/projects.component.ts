@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ImageSliderComponent } from './image-slider.component';
+
+// ... existing code ...
 import { CommonModule } from '@angular/common';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 import { TrackingService } from '@/app/core/services/tracking.service';
@@ -7,7 +10,7 @@ interface Project {
   title: string;
   description: string;
   image: string;
-  additionalImages?: string[];
+  additionalImages: string[];
   tags: string[];
   link: string;
 }
@@ -15,7 +18,7 @@ interface Project {
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ImageSliderComponent],
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss'],
   animations: [
@@ -64,14 +67,14 @@ export class ProjectsComponent implements OnInit {
   projects: Project[] = [{
       title: 'Social Network - Galactic Connection',
       description: 'Modern social network for all galactic beings (human, aliens, and robots) to connect, share, and discover, developed with React, NextJS, TypeScript, Tailwind CSS and a hexagonal architecture.',
-      image: 'assets/screenshots/social-network-min.png',
+      image: '/portfolio-web/assets/screenshots/social-network-min.png',
       additionalImages: [
-        'assets/screenshots/social-network-VII-min.png',
-        'assets/screenshots/social-network-VI-min.png',
-        'assets/screenshots/social-network-II-min.png',
-        'assets/screenshots/social-network-III-min.png',
-        'assets/screenshots/social-network-IV-min.png',
-        'assets/screenshots/social-network-V-min.png',
+        '/portfolio-web/assets/screenshots/social-network-VII-min.png',
+        '/portfolio-web/assets/screenshots/social-network-VI-min.png',
+        '/portfolio-web/assets/screenshots/social-network-II-min.png',
+        '/portfolio-web/assets/screenshots/social-network-III-min.png',
+        '/portfolio-web/assets/screenshots/social-network-IV-min.png',
+        '/portfolio-web/assets/screenshots/social-network-V-min.png',
       ],
       tags: ['React', 'Typescript', 'TailWind', 'Zustand', 'React Query', 'Socket.io', 'NextJS'],
       link: 'https://github.com/desobsesor/social-network-web'
@@ -79,9 +82,9 @@ export class ProjectsComponent implements OnInit {
     {
       title: 'Daily projection grid',
       description: 'A modern web application for visualizing and managing product projections, developed with React, TypeScript, Tailwind CSS, and a hexagonal architecture.',
-      image: 'assets/screenshots/projection-grid-web-min.png',
+      image: '/portfolio-web/assets/screenshots/projection-grid-web-min.png',
       additionalImages: [
-        'assets/screenshots/projection-grid-web-min.png',
+        '/portfolio-web/assets/screenshots/projection-grid-web-min.png',
         'assets/screenshots/projection-grid-web-min.png',
       ],
       tags: ['React', 'Typescript', 'TailWind', 'Zustand', 'React window', 'Web Workers', 'Comlink'],
@@ -90,13 +93,13 @@ export class ProjectsComponent implements OnInit {
     {
       title: 'Tech Racing F1',
       description: 'It allows you to run a simulation that generates a set of race strategies, taking into account the tires and the total number of laps.',
-      image: 'assets/screenshots/f1-3-min.png',
+      image: '/portfolio-web/assets/screenshots/f1-3-min.png',
       additionalImages: [
-        'assets/screenshots/f1-1-min.png',
-        'assets/screenshots/f1-2-min.png',
-        'assets/screenshots/f1-3-min.png',
-        'assets/screenshots/f1-7.png',
-        'assets/screenshots/f1-6.png',
+        '/portfolio-web/assets/screenshots/f1-1-min.png',
+        '/portfolio-web/assets/screenshots/f1-2-min.png',
+        '/portfolio-web/assets/screenshots/f1-3-min.png',
+        '/portfolio-web/assets/screenshots/f1-7.png',
+        '/portfolio-web/assets/screenshots/f1-6.png',
       ],
       tags: ['.NET', 'Entity Framework', 'Serilog', 'Swagger', 'SQL Server', 'MediatR', 'Angular', 'Typescript', 'TailWind', 'RxJS'],
       link: 'https://github.com/desobsesor/tech-racing-f1-web'
@@ -104,14 +107,14 @@ export class ProjectsComponent implements OnInit {
     {
       title: 'Simple Payment',
       description: 'simple payment system to implement with a payment gateway.',
-      image: 'assets/screenshots/simple-payment-min.png',
+      image: '/portfolio-web/assets/screenshots/simple-payment-min.png',
       additionalImages: [
-        'assets/screenshots/simple-payment-min.png',
-        'assets/screenshots/simple-payment-1-min.png',
-        'assets/screenshots/simple-payment-2-min.png',
-        'assets/screenshots/simple-payment-3-min.png',
-        'assets/screenshots/simple-payment-4-min.png',
-        'assets/screenshots/simple-payment-5-min.png'
+        '/portfolio-web/assets/screenshots/simple-payment-min.png',
+        '/portfolio-web/assets/screenshots/simple-payment-1-min.png',
+        '/portfolio-web/assets/screenshots/simple-payment-2-min.png',
+        '/portfolio-web/assets/screenshots/simple-payment-3-min.png',
+        '/portfolio-web/assets/screenshots/simple-payment-4-min.png',
+        '/portfolio-web/assets/screenshots/simple-payment-5-min.png'
       ],
       tags: ['NodeJS', 'NestJS', 'PostgreSQL', 'Swagger', 'Socket', 'React', 'Material UI', 'IA'],
       link: 'https://github.com/desobsesor/simple-payment-web'
@@ -119,10 +122,10 @@ export class ProjectsComponent implements OnInit {
     {
       title: 'Modern Wallet',
       description: 'Portfolio management system for the health sector',
-      image: 'assets/screenshots/mia-wallet-web-min.png',
+      image: '/portfolio-web/assets/screenshots/mia-wallet-web-min.png',
       additionalImages: [
-        'assets/screenshots/mia-wallet-web-min.png',
-        'assets/screenshots/mia-wallet-web-invoice-min.png'
+        '/portfolio-web/assets/screenshots/mia-wallet-web-min.png',
+        '/portfolio-web/assets/screenshots/mia-wallet-web-invoice-min.png'
       ],
       tags: ['NodeJS', 'Express', 'Mongoose', 'MongoDB', 'Swagger', 'NextJS', 'React', 'SocketIO', 'Tailwind', 'IA'],
       link: 'http://mia.suros.co'
@@ -130,64 +133,70 @@ export class ProjectsComponent implements OnInit {
     {
       title: 'Genealogical Chart',
       description: 'Web application for family tree design. The resource can be embedded within a wrapper',
-      image: 'assets/screenshots/genealogical-chart-web-min.png',
+      image: '/portfolio-web/assets/screenshots/genealogical-chart-web-min.png',
+      additionalImages: [
+        '/portfolio-web/assets/screenshots/genealogical-chart-web-min.png'
+      ],
       tags: ['React', 'Vite', 'React Flow', 'Tailwind', 'IA'],
       link: 'http://cds.net.co/genealogical'
     },
     {
       title: 'Separa App',
       description: 'Web application for booking workspaces',
-      image: 'assets/screenshots/separa-web-min.png',
+      image: '/portfolio-web/assets/screenshots/separa-web-min.png',
+      additionalImages: [
+        '/portfolio-web/assets/screenshots/separa-web-min.png'
+      ],
       tags: ['NodeJS', 'NestJS', 'React', 'NextJS', 'MongoDB', 'Tailwind', 'IA'],
-      link: 'http://cds.net.co'
+      link: 'https://www.cdsmaya.com.co'
     },
     {
       title: 'Vibra Web',
       description: 'Interactive web mobile with real-time data visualization and reporting the emotions',
-      image: 'assets/screenshots/vibra-web-min.png',
+      image: '/portfolio-web/assets/screenshots/vibra-web-min.png',
       additionalImages: ['assets/screenshots/vibra-web-min.png',],
       tags: ['NodeJS', 'NestJS', 'MongoDB', 'React', 'React Native', 'Tailwind', 'Expo', 'IA'],
-      link: 'http://cds.net.co'
+      link: 'https://www.cdsmaya.com.co'
     },
     {
       title: 'EAOptima ERP',
       description: 'ERP system for Optima Ballistic Glass',
-      image: 'assets/screenshots/optimaerp-web-min.png',
-      additionalImages: ['assets/screenshots/optimaerp-web-min.png', 'assets/screenshots/optimaerp-web-point-min.png',],
+      image: '/portfolio-web/assets/screenshots/optimaerp-web-min.png',
+      additionalImages: ['/portfolio-web/assets/screenshots/optimaerp-web-min.png', '/portfolio-web/assets/screenshots/optimaerp-web-point-min.png'],
       tags: ['Java', 'EJB', 'JPA', 'HTML5', 'JSF Primefaces', 'PostgresQL', 'Linux', 'Apache Tomcat'],
-      link: 'http://cds.net.co'
+      link: 'https://www.cdsmaya.com.co'
     },
     {
       title: 'EAOptimaERP Accounting',
       description: 'Accounting management module for the Optima Ballistic Glass ERP system',
-      image: 'assets/screenshots/cuentas-contables-web-min.jpeg',
-      additionalImages: ['assets/screenshots/optimaerp-web-min.png', 'assets/screenshots/optimaerp-web-point-min.png',],
+      image: '/portfolio-web/assets/screenshots/cuentas-contables-web-min.jpeg',
+      additionalImages: ['/portfolio-web/assets/screenshots/optimaerp-web-min.png', '/portfolio-web/assets/screenshots/optimaerp-web-point-min.png'],
       tags: ['PHP', 'JQuery', 'PostgresQL', 'HTML5', 'CSS'],
-      link: 'http://cds.net.co'
+      link: 'https://www.cdsmaya.com.co'
     },
     {
       title: 'Suros',
       description: 'Web based system for managing information in clinics and hospitals',
-      image: 'assets/screenshots/suros-historia-clinica-web-min.png',
+      image: '/portfolio-web/assets/screenshots/suros-historia-clinica-web-min.png',
       additionalImages: [
-        'assets/screenshots/suros-web-min.png',
-        'assets/screenshots/suros-farmacia-web-min.png',
-        'assets/screenshots/suros-facturador-web-min.png',
-        'assets/screenshots/suros-historia-clinica-web-min.png'
+        '/portfolio-web/assets/screenshots/suros-web-min.png',
+        '/portfolio-web/assets/screenshots/suros-farmacia-web-min.png',
+        '/portfolio-web/assets/screenshots/suros-facturador-web-min.png',
+        '/portfolio-web/assets/screenshots/suros-historia-clinica-web-min.png'
       ],
       tags: ['C#', 'Ext .Net', 'SQL Server', 'JQuery', 'SignalR', 'IIS'],
-      link: 'http://cds.net.co'
+      link: 'https://www.cdsmaya.com.co'
     },
     {
       title: 'Suros Veterinaria',
       description: 'Web-based information system for veterinary clinic management',
-      image: 'assets/screenshots/sean-web-min.png',
+      image: '/portfolio-web/assets/screenshots/sean-web-min.png',
       additionalImages: [
-        'assets/screenshots/sean-web-min.png',
-        'assets/screenshots/sean-pos-web-min.png',
+        '/portfolio-web/assets/screenshots/sean-web-min.png',
+        '/portfolio-web/assets/screenshots/sean-pos-web-min.png'
       ],
       tags: ['C#', 'Ext .Net', 'SQL Server', 'JQuery', 'SignalR', 'IIS'],
-      link: 'http://cds.net.co'
+      link: 'https://www.cdsmaya.com.co'
     },
     {
       title: 'POS Web',
@@ -195,14 +204,15 @@ export class ProjectsComponent implements OnInit {
       image: 'assets/screenshots/scip-pos-web-min.JPG',
       additionalImages: ['assets/screenshots/scip-pos-web-min.JPG', 'assets/screenshots/scip-web-min.JPG'],
       tags: ['Angular', 'NodeJS', 'MongoDB', 'IA'],
-      link: 'http://cds.net.co'
+      link: 'https://www.cdsmaya.com.co'
     },
     {
       title: 'Portfolio',
       description: 'Web application to view my development company project portfolio',
       image: 'assets/screenshots/portfolio-web-min.png',
+      additionalImages: [''],
       tags: ['Angular', 'NodeJS', 'IA'],
-      link: 'http://cds.net.co'
+      link: 'https://www.cdsmaya.com.co'
     },
     {
       title: 'SCIP Zapateria',
@@ -213,7 +223,7 @@ export class ProjectsComponent implements OnInit {
         'assets/screenshots/scip-zapateria-web-min.jpeg'
       ],
       tags: ['PHP', 'JQuery', 'PostgresQL', 'HTML5', 'CSS'],
-      link: 'http://cds.net.co'
+      link: 'https://www.cdsmaya.com.co'
     },
     {
       title: 'SCIP Mukatri',
@@ -225,7 +235,7 @@ export class ProjectsComponent implements OnInit {
         'assets/screenshots/mukatri-web-min.PNG'
       ],
       tags: ['.Net ASP', 'Bootstrap', 'SQL Server', 'JQuery', 'HTML5', 'CSS'],
-      link: 'http://cds.net.co'
+      link: 'https://www.cdsmaya.com.co'
     },
     {
       title: 'SCIP Optica',
@@ -237,7 +247,7 @@ export class ProjectsComponent implements OnInit {
         'assets/screenshots/scip-opticas-web-min.PNG'
       ],
       tags: ['.Net ASP', 'Bootstrap', 'SQL Server', 'JQuery', 'HTML5', 'CSS'],
-      link: 'http://cds.net.co'
+      link: 'https://www.cdsmaya.com.co'
     },
     {
       title: 'Agenda Caqueteña',
@@ -249,14 +259,15 @@ export class ProjectsComponent implements OnInit {
         'assets/screenshots/agenda-caquetena-web-min.PNG'
       ],
       tags: ['.Net ASP', 'Bootstrap', 'MySQL', 'JQuery', 'HTML5', 'CSS'],
-      link: 'http://cds.net.co'
+      link: 'https://www.cdsmaya.com.co'
     },
     {
       title: 'POS Restaurant',
       description: 'POS application for restaurants',
       image: 'assets/screenshots/pos-min.jpg',
+      additionalImages: [''],
       tags: ['PHP', 'JQuery', 'PostgresQL', 'HTML5'],
-      link: 'http://cds.net.co'
+      link: 'https://www.cdsmaya.com.co'
     },
     {
       title: 'Web page Chamber of Commerce Florencia',
@@ -264,7 +275,7 @@ export class ProjectsComponent implements OnInit {
       image: 'assets/screenshots/ccflorencia-web-min.png',
       additionalImages: ['assets/screenshots/ccflorencia-web-min.png', 'assets/screenshots/ccflorencia-admin-web-min.png'],
       tags: ['.Net ASP', 'Bootstrap', 'SQL Server', 'JQuery', 'HTML5', 'CSS'],
-      link: 'http://cds.net.co'
+      link: 'https://www.cdsmaya.com.co'
     },
     {
       title: 'Web page foundation Afrocaq',
@@ -272,14 +283,15 @@ export class ProjectsComponent implements OnInit {
       image: 'assets/screenshots/afrocaq-web-min.png',
       additionalImages: ['assets/screenshots/afrocaq-web-min.png', 'assets/screenshots/ccflorencia-admin-web-min.png'],
       tags: ['.Net ASP', 'Bootstrap', 'SQL Server', 'JQuery', 'HTML5', 'CSS'],
-      link: 'http://cds.net.co'
+      link: 'https://www.cdsmaya.com.co'
     },
     {
       title: 'Generator Code MDA',
       description: 'Code generator for applications through Model-Driven Development',
       image: 'assets/screenshots/metamodeloMSHtml5_in_eclipsejuno-min.PNG',
+      additionalImages: [''],
       tags: ['ATL', 'MofScript', 'Eclipse', 'MDA'],
-      link: 'http://cds.net.co'
+      link: 'https://www.cdsmaya.com.co'
     }
   ];
 
