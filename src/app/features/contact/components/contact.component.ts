@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
-import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { EmailService, EmailData } from '../services/email.service';
-import { TrackingService } from '@/app/core/services/tracking.service';
+import { EmailData, EmailService } from '../services/email.service';
 
 @Component({
   selector: 'app-contact',
@@ -45,9 +44,20 @@ import { TrackingService } from '@/app/core/services/tracking.service';
     ])
   ]
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent implements OnInit, OnDestroy {
   contactForm: FormGroup;
   isSubmitting = false;
+  submitStatus: 'idle' | 'ok' | 'error' = 'idle';
+  submitMessage = '';
+  /**
+   * Estado del botón de envío. El icono cambia de forma con él: avión en reposo,
+   * avión despegando mientras se envía, visto bueno al guardar y cruz si falla.
+   */
+  estadoBoton: 'listo' | 'enviando' | 'enviado' | 'fallo' = 'listo';
+  /** Tiempo mínimo que se ve el estado "enviando" para que la animación se aprecie. */
+  private readonly duracionMinimaEnvio = 1_200;
+  private readonly vueltaAReposo = 6_000;
+  private temporizadorBoton?: ReturnType<typeof setTimeout>;
   saveSvg = '<svg height="32px" width="32px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16.615 16.615" xml:space="preserve" fill="#f7f3f3"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path style="fill:#f6f3f7;" d="M16.614,5.208c0-0.276-0.225-0.501-0.502-0.501H7.53l1.208,0.813 c0.078,0.053,0.142,0.119,0.199,0.19h6.455L10.408,9.32L7.971,7.566l-0.965,0.65l3.111,2.218c0.17,0.123,0.412,0.121,0.582,0 l4.912-3.502v5.09H5.205V9.428L5.003,9.565C4.845,9.669,4.669,9.721,4.488,9.721C4.39,9.721,4.295,9.7,4.202,9.67v2.854 c0,0.277,0.225,0.502,0.502,0.502h11.409c0.277,0,0.502-0.225,0.502-0.502V5.958c0-0.026-0.004-0.05-0.008-0.072 c0.006-0.027,0.008-0.054,0.008-0.08V5.208H16.614z"></path> <path style="fill:#f6f3f7;" d="M4.308,8.799c0,0.066,0.037,0.127,0.096,0.158c0.06,0.031,0.13,0.027,0.185-0.01l3.735-2.514 C8.373,6.4,8.403,6.344,8.403,6.283c0-0.06-0.03-0.115-0.079-0.149L4.59,3.621C4.535,3.585,4.464,3.58,4.405,3.611 c-0.059,0.032-0.096,0.093-0.096,0.16v1.454C3.721,5.221,3.235,5.195,2.83,5.146C0.888,4.916,0.368,3.75,0.347,3.7 C0.318,3.632,0.252,3.59,0.181,3.59c-0.012,0-0.024,0-0.035,0.003C0.06,3.611,0,3.685,0,3.77c0,2.944,3.495,3.571,4.307,3.677 L4.308,8.799L4.308,8.799z"></path> </g> </g> </g></svg>';
 
 
@@ -73,9 +83,10 @@ export class ContactComponent implements OnInit {
   socialLinks: any = [
     { name: 'GitHub', url: 'https://github.com/desobsesor/', icon: null },
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/yovany-su%C3%A1rez-silva-78202029/', icon: null },
-    { name: 'Phone (318-150-1170)', url: '#', icon: null },
+    { name: 'Teléfono (318-150-1170)', url: '#', icon: null },
+    { name: 'WhatsApp - Chat directo', url: 'https://wa.me/573181501170?text=Hola%20Yovany%2C%20vi%20tu%20portafolio%20y%20me%20gustar%C3%ADa%20conocer%20m%C3%A1s%20acerca%20de%20tus%20servicios.%20%C2%BFPodemos%20conversar%3F', icon: null },
     { name: 'yovanysuarezsilva@gmail.com', url: '/pdf/CV_es_Yovany_Suarez_Silva_2025_FullStack.pdf', icon: null },
-    { name: 'Download CV', url: '/pdf/CV_es_Yovany_Suarez_Silva_2025_FullStack.pdf', icon: null }
+    { name: 'Descargar CV', url: '/pdf/CV_es_Yovany_Suarez_Silva_2025_FullStack.pdf', icon: null }
   ];
 
   private sanitizeSocialIcons(): void {
@@ -83,6 +94,7 @@ export class ContactComponent implements OnInit {
     const linkedinSvg = '<svg fill="#f8f7f7" version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M23,0H9C4,0,0,4,0,9v14c0,5,4,9,9,9h14c5,0,9-4,9-9V9C32,4,28,0,23,0z M12,25c0,0.6-0.4,1-1,1H7c-0.6,0-1-0.4-1-1V13 c0-0.6,0.4-1,1-1h4c0.6,0,1,0.4,1,1V25z M9,11c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3S10.7,11,9,11z M26,25c0,0.6-0.4,1-1,1h-3 c-0.6,0-1-0.4-1-1v-3.5v-1v-2c0-0.8-0.7-1.5-1.5-1.5S18,17.7,18,18.5v2v1V25c0,0.6-0.4,1-1,1h-3c-0.6,0-1-0.4-1-1V13 c0-0.6,0.4-1,1-1h4c0.3,0,0.5,0.1,0.7,0.3c0.6-0.2,1.2-0.3,1.8-0.3c3,0,5.5,2.5,5.5,5.5V25z"></path> </g></svg>';
     const phoneSvg = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M20 14C20 17.7712 20 19.6569 18.8284 20.8284C17.6569 22 15.7712 22 12 22C8.22876 22 6.34315 22 5.17157 20.8284C4 19.6569 4 17.7712 4 14V10C4 6.22876 4 4.34315 5.17157 3.17157C6.34315 2 8.22876 2 12 2C15.7712 2 17.6569 2 18.8284 3.17157C20 4.34315 20 6.22876 20 10" stroke="#edeef2" stroke-width="1.5" stroke-linecap="round"></path> <path d="M15 5H9" stroke="#edeef2" stroke-width="1.5" stroke-linecap="round"></path> <circle cx="12" cy="17" r="2" stroke="#edeef2" stroke-width="1.5"></circle> </g></svg>';
     const emailSvg = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12ZM16 12V13.5C16 14.8807 17.1193 16 18.5 16V16C19.8807 16 21 14.8807 21 13.5V12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21H16" stroke="#faf4f4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>';
+    const whatsappSvg = '<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#25D366" d="M16 3C9.373 3 4 8.373 4 15c0 2.385.7 4.605 1.906 6.47L4 29l7.715-1.852A11.93 11.93 0 0 0 16 27c6.627 0 12-5.373 12-12S22.627 3 16 3z"/><path fill="#fff" d="M22.5 19.1c-.28-.14-1.65-.814-1.905-.907-.255-.093-.44-.14-.626.14-.186.28-.718.907-.88 1.093-.162.186-.325.21-.605.07-.28-.14-1.18-.435-2.248-1.393-.83-.74-1.39-1.654-1.554-1.934-.162-.28-.017-.43.122-.57.125-.124.28-.325.42-.487.14-.162.186-.28.28-.466.093-.186.046-.35-.024-.49-.07-.14-.625-1.507-.86-2.064-.226-.544-.456-.47-.626-.48l-.534-.01c-.186 0-.487.07-.742.35-.255.28-.974.952-.974 2.32 0 1.37.998 2.693 1.137 2.88.14.186 1.965 3 4.76 4.207.665.287 1.184.458 1.59.586.668.212 1.275.182 1.755.11.535-.08 1.65-.674 1.882-1.326.232-.652.232-1.21.163-1.326-.07-.117-.256-.187-.536-.327z"/></g></svg>';
     const pdfSvg = '<svg fill="#f8f7f7" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M19.2,6.67,12.34,0H2.74A2.77,2.77,0,0,0,.81.78,2.62,2.62,0,0,0,0,2.67V21.33a2.62,2.62,0,0,0,.81,1.89A2.77,2.77,0,0,0,2.74,24H16.46a2.77,2.77,0,0,0,1.93-.78,2.62,2.62,0,0,0,.81-1.89V20H24V9.33H19.2ZM11.66,2.16,17,7.33H11.66Zm11,8.51v8H6.17v-8Z"></path><path d="M11.76,13.69a1.71,1.71,0,0,1-.12.71,1.58,1.58,0,0,1-.43.59,2.41,2.41,0,0,1-1.56.46h-.5v1.89H8V12H9.76a2.22,2.22,0,0,1,1.5.42,1.67,1.67,0,0,1,.38.58A1.6,1.6,0,0,1,11.76,13.69Zm-2.64.85h.39a1.29,1.29,0,0,0,.79-.21.9.9,0,0,0,.21-.27.88.88,0,0,0,.07-.32.89.89,0,0,0-.05-.32,1,1,0,0,0-.17-.27A1,1,0,0,0,9.67,13H9.15v1.57Z"></path><path d="M17.33,14.65a2.7,2.7,0,0,1-.16,1.09,2.64,2.64,0,0,1-.61.93,3.13,3.13,0,0,1-2.22.7H12.77V12H14.5a3,3,0,0,1,2.09.7,2.47,2.47,0,0,1,.74,1.92Zm-1.21,0c0-1.14-.52-1.7-1.56-1.7h-.64v3.46h.5a1.53,1.53,0,0,0,1.7-1.76Z"></path><path d="M19.6,17.37H18.45V12h3.16V13h-2v1.38h1.87v.94H19.6Z"></path></g></svg>';
 
 
@@ -90,8 +102,9 @@ export class ContactComponent implements OnInit {
     this.socialLinks[0].icon = this.sanitizer.bypassSecurityTrustHtml(githubSvg);
     this.socialLinks[1].icon = this.sanitizer.bypassSecurityTrustHtml(linkedinSvg);
     this.socialLinks[2].icon = this.sanitizer.bypassSecurityTrustHtml(phoneSvg);
-    this.socialLinks[3].icon = this.sanitizer.bypassSecurityTrustHtml(emailSvg);
-    this.socialLinks[4].icon = this.sanitizer.bypassSecurityTrustHtml(pdfSvg);
+    this.socialLinks[3].icon = this.sanitizer.bypassSecurityTrustHtml(whatsappSvg);
+    this.socialLinks[4].icon = this.sanitizer.bypassSecurityTrustHtml(emailSvg);
+    this.socialLinks[5].icon = this.sanitizer.bypassSecurityTrustHtml(pdfSvg);
   }
 
   isFieldInvalid(field: string): boolean {
@@ -99,26 +112,81 @@ export class ContactComponent implements OnInit {
     return formControl ? formControl.invalid && (formControl.dirty || formControl.touched) : false;
   }
 
-  async onSubmit() {
-    if (this.contactForm.valid && !this.isSubmitting) {
-      this.isSubmitting = true;
-      try {
-        // Implement form submission logic here
-        const emailData: EmailData = {
-          name: this.contactForm.get('name')?.value,
-          email: this.contactForm.get('email')?.value,
-          message: this.contactForm.get('message')?.value
-        };
-
-        await this.emailService.sendEmail(emailData);
-        // await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate API call
-        this.contactForm.reset();
-        // Show success message
-      } catch (error) {
-        // Handle error
-      } finally {
-        this.isSubmitting = false;
-      }
+  /** Texto del botón según el momento de la transacción. */
+  get etiquetaBoton(): string {
+    switch (this.estadoBoton) {
+      case 'enviando':
+        return 'Enviando...';
+      case 'enviado':
+        return 'Mensaje enviado';
+      case 'fallo':
+        return 'Reintentar envío';
+      default:
+        return 'Enviar mensaje';
     }
+  }
+
+  ngOnDestroy(): void {
+    if (this.temporizadorBoton) {
+      clearTimeout(this.temporizadorBoton);
+    }
+  }
+
+  async onSubmit() {
+    if (!this.contactForm.valid || this.isSubmitting) {
+      return;
+    }
+
+    this.isSubmitting = true;
+    this.estadoBoton = 'enviando';
+    this.submitStatus = 'idle';
+    this.submitMessage = '';
+    if (this.temporizadorBoton) {
+      clearTimeout(this.temporizadorBoton);
+    }
+    const inicio = Date.now();
+
+    try {
+      const emailData: EmailData = {
+        name: this.contactForm.get('name')?.value,
+        email: this.contactForm.get('email')?.value,
+        message: this.contactForm.get('message')?.value
+      };
+
+      await this.emailService.sendEmail(emailData);
+
+      // La petición puede volver en milisegundos: se sostiene el estado "enviando"
+      // para que la animación se vea antes de dar el resultado.
+      await this.esperarMinimo(inicio);
+      this.contactForm.reset();
+      this.submitStatus = 'ok';
+      this.submitMessage = '¡Mensaje enviado! Te responderé pronto.';
+      this.estadoBoton = 'enviado';
+      this.programarVueltaAReposo();
+    } catch (error) {
+      await this.esperarMinimo(inicio);
+      this.submitStatus = 'error';
+      this.submitMessage = 'No se pudo enviar tu mensaje. Inténtalo de nuevo en unos segundos.';
+      this.estadoBoton = 'fallo';
+    } finally {
+      this.isSubmitting = false;
+    }
+  }
+
+  /** Espera lo que falte para que el estado "enviando" dure lo mínimo visible. */
+  private async esperarMinimo(inicio: number): Promise<void> {
+    const restante = this.duracionMinimaEnvio - (Date.now() - inicio);
+    if (restante > 0) {
+      await new Promise((resolver) => setTimeout(resolver, restante));
+    }
+  }
+
+  /** Tras unos segundos, el botón vuelve a ofrecerse para enviar otro mensaje. */
+  private programarVueltaAReposo(): void {
+    this.temporizadorBoton = setTimeout(() => {
+      if (this.estadoBoton === 'enviado') {
+        this.estadoBoton = 'listo';
+      }
+    }, this.vueltaAReposo);
   }
 }

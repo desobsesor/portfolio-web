@@ -1,10 +1,11 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 /**
  * ImageSliderComponent
- * 
- * Componente para mostrar un carrusel de imágenes con deslizamiento automático y controles manuales.
- * Recibe un array de URLs de imágenes y un texto alternativo para las imágenes.
+ *
+ * Carrusel de capturas del proyecto: avanza solo, se detiene cuando el usuario
+ * interactúa con él (ratón o teclado) y no se mueve si el sistema pide menos
+ * animaciones.
  */
 import { CommonModule } from '@angular/common';
 
@@ -19,40 +20,60 @@ export class ImageSliderComponent implements OnInit, OnDestroy {
   /** Array de URLs de imágenes a mostrar en el slider */
   private _images: string[] = [];
 
-  @Input() 
+  @Input()
   set images(value: string[]) {
-    this._images = value;
-    console.log('ImageSliderComponent images input:', value);
+    this._images = value ?? [];
+    this.currentIndex = 0;
+    if (this.autoSlideEnabled) {
+      this.restartAutoSlide();
+    }
   }
   get images(): string[] {
     return this._images;
   }
 
-  /** Texto alternativo para las imágenes */
+  /** Texto alternativo base; cada captura añade su posición en la serie */
   @Input() altText: string = '';
 
   /** Índice actual de la imagen mostrada */
   currentIndex: number = 0;
 
   /** Intervalo para el deslizamiento automático */
-  private slideInterval?: any;
+  private slideInterval?: ReturnType<typeof setInterval>;
+
+  /** El sistema pide reducir el movimiento, así que no hay avance automático */
+  private reduceMotion = false;
+
+  private readonly INTERVAL_MS = 4000;
+
+  private get autoSlideEnabled(): boolean {
+    return !this.reduceMotion && this.images.length > 1;
+  }
 
   ngOnInit(): void {
-    this.startAutoSlide();
+    this.reduceMotion =
+      typeof window !== 'undefined' &&
+      (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false);
+
+    if (this.autoSlideEnabled) {
+      this.startAutoSlide();
+    }
   }
 
   ngOnDestroy(): void {
     this.stopAutoSlide();
   }
 
-  /** Inicia el deslizamiento automático de imágenes cada 3 segundos */
+  /** Inicia el avance automático de capturas */
   startAutoSlide(): void {
-    this.slideInterval = setInterval(() => {
-      this.next();
-    }, 3000);
+    if (!this.autoSlideEnabled) {
+      return;
+    }
+    this.stopAutoSlide();
+    this.slideInterval = setInterval(() => this.next(), this.INTERVAL_MS);
   }
 
-  /** Detiene el deslizamiento automático */
+  /** Detiene el avance automático */
   stopAutoSlide(): void {
     if (this.slideInterval) {
       clearInterval(this.slideInterval);
@@ -60,22 +81,30 @@ export class ImageSliderComponent implements OnInit, OnDestroy {
     }
   }
 
-  /** Muestra la siguiente imagen en el slider */
+  private restartAutoSlide(): void {
+    this.stopAutoSlide();
+    this.startAutoSlide();
+  }
+
+  /** Muestra la siguiente imagen y reinicia el temporizador */
   next(): void {
-    if(this.images.length > 0) {
+    if (this.images.length > 0) {
       this.currentIndex = (this.currentIndex + 1) % this.images.length;
+      this.restartAutoSlide();
     }
   }
 
-  /** Muestra la imagen anterior en el slider */
+  /** Muestra la imagen anterior y reinicia el temporizador */
   prev(): void {
-    if(this.images.length > 0) {
+    if (this.images.length > 0) {
       this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+      this.restartAutoSlide();
     }
   }
 
   /** Navega a una imagen específica por índice */
   goTo(index: number): void {
     this.currentIndex = index;
+    this.restartAutoSlide();
   }
 }

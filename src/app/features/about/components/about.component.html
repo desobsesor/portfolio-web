@@ -2,27 +2,29 @@
   <div class="profile-section" [@slideIn]>
     <div class="profile-content">
       <div class="profile-card">
-        <h2 class="section-title-about" >About Me 
+        <h2 class="section-title-about" >Sobre mí 
           <span class="section-span"> Yovany Suárez Silva</span>
         </h2>
-        <p class="bio" style="padding: 4px; background-color: #000000; border-radius: 6px; padding-left: 10px; ">
-          Passionate developer crafting innovative digital solutions with modern technologies.
+        <p class="bio typewriter" style="padding: 4px; background-color: #000000; border-radius: 6px; padding-left: 10px; "
+          [attr.aria-label]="profileBio">
+          <span class="typewriter-ghost" aria-hidden="true">{{ profileBio }}</span>
+          <span class="typewriter-live" aria-hidden="true">{{ typedProfileBio }}</span>
         </p>
       </div>
       <div class="avatar-card" (click)="openOwnerModal()">
         <div class="avatar-wrapper">
-          <img src="assets/6803296_ia-min.jpeg" alt="Profile Avatar" class="avatar-image">
+          <img src="assets/6803296_ia-min.jpeg" alt="Avatar de perfil" class="avatar-image">
         </div>
         <div class="avatar-info">
-          <h3 class="engineer-name">Software Engineer</h3>
-          <p class="engineer-title">Full Stack Developer</p>
+          <h3 class="engineer-name">Ingeniero de Software</h3>
+          <p class="engineer-title">AI Software Engineer</p>
         </div>
       </div>
     </div>
   </div>
 
   <div class="skills-section">
-    <h3 class="subsection-title">Skills</h3>
+    <h3 class="subsection-title">Habilidades</h3>
     <div class="skills-grid" [@staggerList]="skills.length">
       <div class="skill-card" *ngFor="let skill of skills" [@cardEnter] [@flipCard]="'inactive'" (@flipCard.done)="onAnimationDone($event)">
         <div class="skill-card-inner">
@@ -35,9 +37,9 @@
           </div>
           <div class="skill-card-back">
             <h4 class="skill-name" translate="no">{{skill.name}}</h4>
-            <p class="skill-description">{{skill.description || 'Experienced in building modern applications with ' + skill.name}}</p>
+            <p class="skill-description">{{skill.description || 'Con experiencia en construir aplicaciones modernas con ' + skill.name}}</p>
             <div class="skill-level-detail">
-              <span class="level-label">Proficiency:</span>
+              <span class="level-label">Nivel:</span>
               <span class="level-value">{{skill.level}}%</span>
             </div>
           </div>
@@ -67,10 +69,17 @@
   </div>
 
   <div class="experience-section">
-    <h3 class="subsection-title">Experience</h3>
+    <h3 class="subsection-title">Experiencia</h3>
     
-    <p class="bio" style="padding: 4px; background-color: #000000; border-radius: 6px; padding-left: 10px; ">
-    Over 10 years of experience in software engineering, with a solid track record of success in developing and implementing innovative solutions for various sectors.
+    <p class="bio typewriter" #experienceBioEl
+      style="padding: 4px; background-color: #000000; border-radius: 6px; padding-left: 10px; "
+      [attr.aria-label]="experienceBio">
+      <span class="typewriter-ghost" aria-hidden="true">{{ experienceBio }}</span>
+      <span class="typewriter-live" aria-hidden="true">{{ typedExperienceBio }}</span>
+    </p>
+    <p class="archive-link">
+      El detalle de cada sistema, con sus capturas y su stack, está en el
+      <a routerLink="/projects">archivo de desarrollos</a>.
     </p>
     <div class="timeline-vertical" [@staggerList]="experiences.length">
       <div class="timeline-line"></div>

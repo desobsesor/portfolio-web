@@ -1,17 +1,20 @@
 <section class="home-container" [@fadeInUp]>
     <div class="hero-content">
-        <h1 class="title" [@slideIn]>Portfolio</h1>
-        <p class="subtitle" [@slideIn]="{ value: '*', params: { delay: '200ms' } }">
-            Crafting Digital Experiences
+        <h1 class="title" [@slideIn]>Portafolio</h1>
+        <p class="subtitle typewriter" [@slideIn]="{ value: '*', params: { delay: '200ms' } }"
+            [attr.aria-label]="fullSubtitle">
+            <span aria-hidden="true">{{ typedText }}</span>
         </p>
         <div class="cta-container" [@slideIn]="{ value: '*', params: { delay: '400ms' } }">
-            <button (click)="navigateToProjects()" class="cta-button">Explore My Work</button>
+            <button (click)="navigateToProjects()" class="cta-button">Explora mi trabajo</button>
         </div>
 
         <div class="avatar-card">
-            <div class="avatar-wrapper">
-                <img src="assets/6803296_ia-min.jpeg" alt="Profile Avatar" class="avatar-image">
-            </div>
+            <!-- El avatar lleva a "Sobre mí": es un botón para que funcione también con teclado. -->
+            <button type="button" class="avatar-wrapper" (click)="navigateToAbout()"
+                aria-label="Ver mi perfil en Sobre mí" title="Sobre mí">
+                <img src="assets/6803296_ia-min.jpeg" alt="Avatar de perfil" class="avatar-image">
+            </button>
         </div>
     </div>
     <div class="particle-container">

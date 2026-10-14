@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:portfolio-cds": "node dist/portfolio-cds/server/server.mjs"
+    "build:api": "node node_modules/esbuild/bin/esbuild src/api-server.ts --bundle --platform=node --format=esm --target=node20 --packages=external --outfile=dist/api/server.mjs",
+    "serve:api": "node --env-file-if-exists=.env dist/api/server.mjs"
   },
   "private": true,
   "dependencies": {
@@ -24,6 +25,7 @@
     "chart.js": "^4.4.8",
     "date-fns": "^4.1.0",
     "express": "^4.18.2",
+    "mongodb": "^5.9.2",
     "ng2-charts": "^8.0.0",
     "resend": "^4.2.0",
     "rxjs": "~7.8.0",

@@ -244,9 +244,61 @@
     }
 }
 
+.archive-link {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-lg);
+
+    a {
+        color: var(--accent-coral);
+        text-underline-offset: 3px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+/* Efecto máquina de escribir en los párrafos de presentación
+   (about.component.ts los escribe carácter a carácter). El texto fantasma reserva el
+   alto final, así el resto de la página no se mueve mientras se escribe. */
+.typewriter {
+    position: relative;
+
+    .typewriter-ghost {
+        visibility: hidden;
+    }
+
+    .typewriter-live {
+        position: absolute;
+        inset: 0;
+        padding: inherit;
+
+        &::after {
+            content: '▋';
+            margin-left: 4px;
+            color: var(--accent-coral);
+            animation: blink 1s steps(2, start) infinite;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .typewriter-live::after {
+            animation: none;
+        }
+    }
+}
+
+@keyframes blink {
+    to {
+        opacity: 0;
+    }
+}
+
 .subsection-title {
     font-size: 1.8rem;
-    color: var(--text-primary);
+    color: var(--background-primary); // títulos "Habilidades" y "Experiencia" en tono oscuro
+    font-weight: 700;
     margin-bottom: var(--spacing-lg);
     background: var(--gradient-primary);
     padding: var(--spacing-sm) var(--spacing-lg);

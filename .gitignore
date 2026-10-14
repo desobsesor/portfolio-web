@@ -41,8 +41,21 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# Secrets / local env (nunca subir MONGODB_URI)
+.env
+.env.local
+
+# La plantilla SÍ se versiona: no lleva credenciales, solo los nombres de las variables.
+!.env.example
+
 # Docs
 .vscode
 
 package-lock.json
+
 vercel.json
+
+#IA
+.commandcode/
+.angular/
+/docs

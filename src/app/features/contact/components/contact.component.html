@@ -1,11 +1,19 @@
 <section class="contact-container" [@fadeIn]>
-    <h2 class="section-title" [@slideIn]>Contact me</h2>
+    <div class="contact-header" [@slideIn]>
+        <img src="assets/6803296_ia-min.jpeg" alt="Foto de Yovany Suárez" class="contact-avatar" loading="lazy">
+        <div class="contact-heading">
+            <h2 class="section-title">Contáctame</h2>
+            <p class="contact-owner">
+                Yovany Suárez Silva <span class="contact-role">- AI Software Engineer</span>
+            </p>
+        </div>
+    </div>
 
     <div class="contact-content" [@slideIn]>
         <div class="contact-info">
             <div class="info-card" [@cardEnter]>
-                <h3 style="margin-top: -16px;">Let's Connect</h3>
-                <p>Ready to start a project or just want to chat? Send me a message!</p>
+                <h3 style="margin-top: -16px;">Conectemos</h3>
+                <p>¿Listo para empezar un proyecto o simplemente quieres conversar? ¡Envíame un mensaje!</p>
                 <div class="social-links" [@staggerList]="socialLinks.length">
                     <a *ngFor="let link of socialLinks" [href]="link.url" class="social-link" target="_blank"
                         [@cardEnter]>
@@ -19,32 +27,57 @@
         <form [formGroup]="contactForm" class="contact-form" (ngSubmit)="onSubmit()" [@cardEnter]>
             <div class="form-group" [@staggerList]="3">
                 <div class="input-container">
-                    <input type="text" formControlName="name" placeholder="Your Name"
+                    <input type="text" formControlName="name" placeholder="Tu nombre"
                         [class.invalid]="isFieldInvalid('name')">
                     <div class="input-focus"></div>
                 </div>
 
                 <div class="input-container">
-                    <input type="email" formControlName="email" placeholder="Your Email"
+                    <input type="email" formControlName="email" placeholder="Tu correo"
                         [class.invalid]="isFieldInvalid('email')">
                     <div class="input-focus"></div>
                 </div>
 
                 <div class="input-container">
-                    <textarea formControlName="message" placeholder="Your Message" rows="5"
+                    <textarea formControlName="message" placeholder="Tu mensaje" rows="5"
                         [class.invalid]="isFieldInvalid('message')"></textarea>
                     <div class="input-focus"></div>
                 </div>
             </div>
 
-            <button type="submit" class="submit-button" [disabled]="contactForm.invalid || isSubmitting">
-                <span class="button-text">
-                    <span style="margin-top: -30px !important; color: black" >
-                        {{ isSubmitting ? 'Sending...' : 'Send Message' }}
-                    </span>
+            <button type="submit" class="submit-button" [class.enviando]="estadoBoton === 'enviando'"
+                [class.enviado]="estadoBoton === 'enviado'" [class.fallo]="estadoBoton === 'fallo'"
+                [disabled]="contactForm.invalid || isSubmitting">
+                <span class="button-icono" aria-hidden="true">
+                    <!-- Cada estado tiene su propia forma; al aparecer se anima sola. -->
+                    <svg *ngIf="estadoBoton === 'listo'" class="ico-avion" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 2 11 13" />
+                        <path d="M22 2 15 22l-4-9-9-4 20-7z" />
+                    </svg>
+                    <svg *ngIf="estadoBoton === 'enviando'" class="ico-avion despega" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 2 11 13" />
+                        <path d="M22 2 15 22l-4-9-9-4 20-7z" />
+                    </svg>
+                    <svg *ngIf="estadoBoton === 'enviado'" class="ico-check" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 6 9 17l-5-5" />
+                    </svg>
+                    <svg *ngIf="estadoBoton === 'fallo'" class="ico-cruz" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 6 6 18" />
+                        <path d="m6 6 12 12" />
+                    </svg>
                 </span>
-                <div class="button-wave" *ngIf="isSubmitting"></div>
+                <span class="button-texto">{{ etiquetaBoton }}</span>
+                <span class="button-wave" *ngIf="isSubmitting" aria-hidden="true"></span>
             </button>
+
+            <p *ngIf="submitStatus !== 'idle'" class="form-status" [class.ok]="submitStatus === 'ok'"
+                [class.error]="submitStatus === 'error'" role="status">
+                {{ submitMessage }}
+            </p>
         </form>
     </div>
 </section>

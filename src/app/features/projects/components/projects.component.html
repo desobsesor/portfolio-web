@@ -1,50 +1,61 @@
 <section class="projects-container" [@fadeIn]>
-    <h2 class="section-title" [@slideIn]>Outstanding projects</h2>
+    <header class="archive-header" [@slideIn]>
+        <h2 class="archive-title">Archivo de desarrollos</h2>
+        <p class="archive-kicker">Lo que he construido en más de 10 años de carrera</p>
+        <p class="archive-note">
+            Sistemas hechos para clientes, para mi propia empresa o como exploración técnica.
+            No es un catálogo de productos en venta: es el registro de mi trabajo y de las
+            decisiones técnicas de cada etapa. Algunos siguen en operación y otros son parte
+            del histórico, por eso varios no tienen enlace público.
+        </p>
+        <p class="archive-count">{{ projects.length }} desarrollos registrados</p>
+    </header>
 
     <div class="projects-grid" [@staggerList]="projects.length">
-        <div class="project-card" *ngFor="let project of projects" [@cardEnter]>
-            <div class="card-content">
-                <div class="project-image-container" (mouseenter)="showTooltip(project)" (mouseleave)="hideTooltip()">
-                    <div class="project-image" [style.backgroundImage]="'url(' + project.image + ')'">
-                        <div (click)="openProject(project)" class="image-overlay"></div>
-                    </div>
-
-                    <!-- Tooltip para imágenes adicionales -->
-                    <div class="tooltip" *ngIf="hoveredProject === project && project.additionalImages?.length">
-                        <div class="tooltip-images">
-                            <img *ngFor="let img of project.additionalImages" [src]="img"
-                                [alt]="project.title + ' screenshot'">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-info">
-                    <h3 class="project-title">{{project.title}}</h3>
-                    <p class="project-description">{{project.description}}</p>
-                    <div class="project-tags">
-                        <span class="tag" *ngFor="let tag of project.tags">{{tag}}</span>
-                    </div>
-                    <div class="project-actions">
-                        <button class="view-details-btn" (click)="openProject(project)">View Details</button>
-                    </div>
-                </div>
+        <article class="record" *ngFor="let project of projects" [@cardEnter]>
+            <div class="record-media">
+                <img [src]="project.image" [alt]="'Captura de pantalla de ' + project.title"
+                    width="1600" height="1000" loading="lazy" decoding="async" (error)="onImageError($event)">
+                <span class="record-media-fallback" aria-hidden="true">{{ project.title }}</span>
+                <span class="record-kind">{{ kindLabel(project) }}</span>
+                <span class="record-shots" *ngIf="project.additionalImages.length">
+                    {{ project.additionalImages.length === 1
+                        ? '+1 captura'
+                        : '+' + project.additionalImages.length + ' capturas' }}
+                </span>
             </div>
-        </div>
+
+            <div class="record-body">
+                <h3 class="record-title">{{ project.title }}</h3>
+                <p class="record-description">{{ project.description }}</p>
+                <p class="record-stack">{{ project.tags.join(' · ') }}</p>
+                <button type="button" class="record-open" (click)="openProject(project)"
+                    [attr.aria-label]="'Ver ficha de ' + project.title">Ver ficha</button>
+            </div>
+        </article>
     </div>
 
-    <div class="project-modal" *ngIf="selectedProject" [@modalEnter] (click)="closeProject()">
-        <div class="modal-content" (click)="$event.stopPropagation()">
-            <button class="close-button" (click)="closeProject()">×</button>
-            <h2>{{selectedProject.title}}</h2>
-            <app-image-slider *ngIf="selectedProject.additionalImages && selectedProject.additionalImages.length > 0"
+    <div class="dialog-backdrop" *ngIf="selectedProject" (click)="closeProject()">
+        <div #dialog class="project-dialog" tabindex="-1" role="dialog" aria-modal="true"
+            aria-labelledby="project-dialog-title" [@modalEnter] (click)="$event.stopPropagation()">
+            <button type="button" class="dialog-close" aria-label="Cerrar ficha"
+                (click)="closeProject()">&times;</button>
+
+            <p class="dialog-kind">{{ kindLabel(selectedProject) }}</p>
+            <h2 id="project-dialog-title" class="dialog-title">{{ selectedProject.title }}</h2>
+
+            <app-image-slider *ngIf="selectedProject.additionalImages.length"
                 [images]="selectedProject.additionalImages"
-                [altText]="selectedProject.title + ' screenshot'"></app-image-slider>
-            <p>{{selectedProject.description}}</p>
-            <div class="project-tags modal-tags">
-                <span class="tag" *ngFor="let tag of selectedProject.tags">{{tag}}</span>
-            </div>
-            <a [href]="selectedProject.link" target="_blank" class="view-project"
-                (click)="onExternalLinkClick(selectedProject)">View Project</a>
+                [altText]="'Captura de ' + selectedProject.title"></app-image-slider>
+
+            <p class="dialog-description">{{ selectedProject.description }}</p>
+            <p class="dialog-stack">{{ selectedProject.tags.join(' · ') }}</p>
+
+            <a *ngIf="selectedProject.link" [href]="selectedProject.link" target="_blank"
+                rel="noopener noreferrer" class="dialog-link" (click)="onExternalLinkClick(selectedProject)">
+                {{ linkLabel(selectedProject) }}
+            </a>
+            <p *ngIf="!selectedProject.link" class="dialog-nolink">{{ noLinkNote(selectedProject) }}</p>
         </div>
     </div>
 </section>

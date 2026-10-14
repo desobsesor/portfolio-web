@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { animate, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-header',
@@ -10,12 +10,12 @@ import { trigger, transition, style, animate } from '@angular/animations';
   template: `
     <nav class="main-nav" [@fadeIn]>
       <div class="nav-content">
-        <a class="logo" routerLink="/">Portfolio</a>
+        <a class="logo" routerLink="/">Portafolio</a>
         <div class="nav-links">
-          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-          <a routerLink="/projects" routerLinkActive="active">Projects</a>      
-          <a routerLink="/about" routerLinkActive="active">About</a>
-          <a routerLink="/contact" routerLinkActive="active">Contact</a>
+          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a>
+          <a routerLink="/projects" routerLinkActive="active">Proyectos</a>      
+          <a routerLink="/about" routerLinkActive="active">Sobre mí</a>
+          <a routerLink="/contact" routerLinkActive="active">Contacto</a>
           <!--<a routerLink="/analytics" routerLinkActive="active">Analytics</a>-->
         </div>
       </div>

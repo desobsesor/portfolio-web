@@ -1,11 +1,16 @@
-<div class="image-slider" (mouseenter)="stopAutoSlide()" (mouseleave)="startAutoSlide()">
+<div class="image-slider" role="group" aria-roledescription="carrusel" aria-label="Capturas del proyecto"
+  (mouseenter)="stopAutoSlide()" (mouseleave)="startAutoSlide()" (focusin)="stopAutoSlide()"
+  (focusout)="startAutoSlide()">
   <div class="slider-wrapper" [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
-    <img *ngFor="let img of images" [src]="img" [alt]="altText" class="slider-image" />
+    <img *ngFor="let img of images; let i = index" [src]="img"
+      [alt]="altText + ' (' + (i + 1) + ' de ' + images.length + ')'" class="slider-image" loading="lazy"
+      decoding="async" />
   </div>
-  <button class="slider-control prev" (click)="prev()" aria-label="Previous image">&#10094;</button>
-  <button class="slider-control next" (click)="next()" aria-label="Next image">&#10095;</button>
+  <button type="button" class="slider-control prev" (click)="prev()" aria-label="Captura anterior">&#10094;</button>
+  <button type="button" class="slider-control next" (click)="next()" aria-label="Captura siguiente">&#10095;</button>
   <div class="slider-dots">
-    <span *ngFor="let img of images; let i = index" (click)="goTo(i)" [class.active]="i === currentIndex"
-      class="dot"></span>
+    <button type="button" *ngFor="let img of images; let i = index" (click)="goTo(i)" class="dot"
+      [class.active]="i === currentIndex" [attr.aria-label]="'Ir a la captura ' + (i + 1)"
+      [attr.aria-current]="i === currentIndex"></button>
   </div>
 </div>

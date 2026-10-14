@@ -1,14 +1,14 @@
 // Modern Portfolio Theme Variables
 
 // Glass Morphism
-$glass-bg: rgba(255, 255, 255, 0.1);
-$glass-border: rgba(255, 255, 255, 0.2);
-$glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+$glass-bg: rgba(38, 37, 59, 0.6);
+$glass-border: rgba(247, 247, 255, 0.08);
+$glass-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
 $glass-backdrop: blur(12px);
 
 // Neumorphism
-$neu-light: rgba(255, 255, 255, 0.1);
-$neu-dark: rgba(0, 0, 0, 0.2);
+$neu-light: rgba(247, 247, 255, 0.05);
+$neu-dark: rgba(0, 0, 0, 0.35);
 $neu-shadow-distance: 10px;
 
 // Import mixins
@@ -16,22 +16,24 @@ $neu-shadow-distance: 10px;
 
 // Color Palette
 :root {
-    // Base Colors
-    --background-primary: #0b0b2b;
-    --background-secondary: #14143a;
+    // Base Colors (Superlist aubergine stack)
+    --background-primary: #181824;
+    --background-secondary: rgba(38, 37, 59, 0.82);
+    --background-tertiary: #000000;
     --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-secondary: #8e8da0;
 
-    // Accent Colors (based on existing Angular palette)
-    --accent-blue: var(--bright-blue);
-    --accent-violet: var(--electric-violet);
-    --accent-pink: var(--vivid-pink);
+    // Accent Colors (bichromatic: aubergine + coral)
+    --accent-coral: #ff4a36;
+    --accent-iris: #535676;
+    --accent-blue: #ff4a36;
+    --accent-violet: #535676;
+    --accent-pink: #ff4a36;
 
     // Gradients
-    --gradient-primary: linear-gradient(135deg,
-            var(--accent-blue) 0%,
-            var(--accent-violet) 50%,
-            var(--accent-pink) 100%);
+    --gradient-primary: linear-gradient(120deg,
+            #ffffff 0%,
+            #ff4a36 100%);
 
     // Animation Timings
     --transition-fast: 200ms;

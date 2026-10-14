@@ -7,6 +7,8 @@ import {
 import express from 'express';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { montarApi } from './server/api';
+import { cabecerasSeguridad } from './server/seguridad';
 
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));
 const browserDistFolder = resolve(serverDistFolder, '../browser');
@@ -14,17 +16,11 @@ const browserDistFolder = resolve(serverDistFolder, '../browser');
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
-/**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/**', (req, res) => {
- *   // Handle API request
- * });
- * ```
- */
+/** Cabeceras de seguridad (CSP, nosniff, …) en cada respuesta, incluido el SSR. */
+app.use(cabecerasSeguridad);
+
+/** Contacto y telemetría: las mismas rutas que monta `src/api-server.ts`. */
+montarApi(app);
 
 /**
  * Serve static files from /browser
